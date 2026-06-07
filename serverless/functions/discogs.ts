@@ -1,7 +1,4 @@
-// Cloudflare Worker / Vercel Edge Function
-// GET /api/discogs/barcode?barcode=...
-// GET /api/discogs/search?artist=...&album=...
-// Proxies requests to Discogs API, keeping consumer key/secret server-side
+import { searchByBarcode, searchByArtistAlbum } from '../lib/discogs'
 
 export async function handleDiscogs(request: Request): Promise<Response> {
   const url = new URL(request.url)
@@ -9,15 +6,46 @@ export async function handleDiscogs(request: Request): Promise<Response> {
   const artist = url.searchParams.get('artist')
   const album = url.searchParams.get('album')
 
-  // Validate and route to appropriate Discogs endpoint
-  if (barcode) {
-    // GET https://api.discogs.com/database/search?barcode=...
-  } else if (artist && album) {
-    // GET https://api.discogs.com/database/search?artist=...&release_title=...
-  }
+  try {
+    if (barcode) {
+      const result = await searchByBarcode(barcode)
+      if (!result) {
+        return new Response(JSON.stringify({ error: 'No results found' }), {
+          status: 404,
+          headers: { 'Content-Type': 'application/json' },
+        })
+      }
+      return new Response(JSON.stringify(result), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
 
-  return new Response(JSON.stringify({ error: 'Not implemented' }), {
-    status: 501,
-    headers: { 'Content-Type': 'application/json' },
-  })
+    if (artist && album) {
+      const result = await searchByArtistAlbum(artist, album)
+      if (!result) {
+        return new Response(JSON.stringify({ error: 'No results found' }), {
+          status: 404,
+          headers: { 'Content-Type': 'application/json' },
+        })
+      }
+      return new Response(JSON.stringify(result), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
+
+    return new Response(JSON.stringify({ error: 'Provide barcode or artist+album parameters' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        error: 'Discogs lookup failed',
+        message: error instanceof Error ? error.message : 'Unknown error',
+      }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } },
+    )
+  }
 }

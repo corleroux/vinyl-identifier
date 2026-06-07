@@ -1,7 +1,7 @@
-// Cloudflare Worker / Vercel Edge Function
-// POST /api/identify
-// Accepts: multipart/form-data with image file
-// Returns: structured vinyl record identification
+import { identifyWithVision, researchWithLLM } from '../lib/llm'
+import { searchByArtistAlbum } from '../lib/discogs'
+import type { VisionResult, ResearchResult } from '../lib/llm'
+import type { DiscogsResult } from '../lib/discogs'
 
 export interface IdentifyResponse {
   artist: string
@@ -33,17 +33,67 @@ export interface IdentifyResponse {
   confidence: number
 }
 
-export async function handleIdentify(request: Request): Promise<Response> {
-  // 1. Parse multipart form data to extract image
-  // 2. Forward image to Vision LLM (Gemini / GPT-4o)
-  // 3. Parse structured response from Vision LLM
-  // 4. Forward structured data to Research LLM (Claude / GPT-4)
-  // 5. Query Discogs API for enrichment
-  // 6. Merge all data into unified response
-  // 7. Return IdentifyResponse as JSON
+function mergeResults(
+  vision: VisionResult,
+  research: ResearchResult,
+  discogs: DiscogsResult | null,
+): IdentifyResponse {
+  return {
+    artist: discogs?.artist ?? vision.artist,
+    album: discogs?.title ?? vision.album,
+    label: discogs?.label ?? vision.label ?? undefined,
+    catalogNumber: discogs?.catalogNumber ?? vision.catalogNumber ?? undefined,
+    country: discogs?.country ?? undefined,
+    releaseYear: discogs?.year || undefined,
+    format: discogs?.format ?? undefined,
+    genre: discogs?.genre ?? undefined,
+    rarityTier: research.rarityTier,
+    estimatedValueLow: discogs?.blockAvgPrice ?? research.estimatedValueLow,
+    estimatedValueHigh: discogs?.blockMedianPrice ?? research.estimatedValueHigh,
+    currency: research.currency,
+    condition: research.condition,
+    priceHistory: research.priceHistory,
+    variants: research.variants,
+    similarReleases: research.similarReleases,
+    confidence: vision.confidence,
+  }
+}
 
-  return new Response(JSON.stringify({ error: 'Not implemented' }), {
-    status: 501,
-    headers: { 'Content-Type': 'application/json' },
-  })
+export async function handleIdentify(request: Request): Promise<Response> {
+  try {
+    const formData = await request.formData()
+    const imageFile = formData.get('image')
+
+    if (!imageFile || !(imageFile instanceof Blob)) {
+      return new Response(JSON.stringify({ error: 'No image file provided' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
+
+    const buffer = await imageFile.arrayBuffer()
+    const contentType = imageFile.type || 'image/jpeg'
+
+    const vision = await identifyWithVision(buffer, contentType)
+
+    const [research, discogs] = await Promise.all([
+      researchWithLLM(vision),
+      searchByArtistAlbum(vision.artist, vision.album).catch(() => null),
+    ])
+
+    const result = mergeResults(vision, research, discogs)
+
+    return new Response(JSON.stringify(result), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        error: 'Identification failed',
+        message: error instanceof Error ? error.message : 'Unknown error',
+      }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } },
+    )
+  }
 }
