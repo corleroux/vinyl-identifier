@@ -1,0 +1,116 @@
+{
+  "app": {
+    "name": "Vinyl Identifier"
+  },
+  "nav": {
+    "home": "Home",
+    "scan": "Scan",
+    "library": "Library",
+    "compare": "Compare",
+    "settings": "Settings"
+  },
+  "home": {
+    "title": "Vinyl Identifier",
+    "subtitle": "Snap a photo to discover your record's rarity and value",
+    "camera": "Take Photo",
+    "gallery": "Upload from Gallery",
+    "barcode": "Scan Barcode",
+    "recentScans": "Recent Scans"
+  },
+  "scan": {
+    "frameGuide": "Frame the vinyl in the guide area",
+    "retake": "Retake",
+    "confirm": "Use Photo",
+    "processing": "Identifying your vinyl...",
+    "visionStep": "Analyzing image",
+    "researchStep": "Researching rarity & value",
+    "discogsStep": "Enriching with Discogs data",
+    "error": "Unable to identify this vinyl",
+    "manualFallback": "Enter the artist and album manually",
+    "artistPlaceholder": "Artist name",
+    "albumPlaceholder": "Album title",
+    "submit": "Identify"
+  },
+  "report": {
+    "title": "Rarity Report",
+    "artist": "Artist",
+    "album": "Album",
+    "label": "Label",
+    "catalogNumber": "Catalog #",
+    "country": "Country",
+    "releaseYear": "Release Year",
+    "format": "Format",
+    "rarityTier": "Rarity",
+    "estimatedValue": "Estimated Value",
+    "condition": "Condition",
+    "priceHistory": "Price History & Market Trends",
+    "variants": "Other Pressings",
+    "similarReleases": "Similar Releases",
+    "notes": "Notes",
+    "saveToCollection": "Save to Collection",
+    "share": "Share",
+    "exportPdf": "Export as PDF"
+  },
+  "rarity": {
+    "common": "Common",
+    "uncommon": "Uncommon",
+    "rare": "Rare",
+    "very_rare": "Very Rare",
+    "legendary": "Legendary"
+  },
+  "condition": {
+    "mint": "Mint",
+    "near_mint": "Near Mint",
+    "vg_plus": "VG+",
+    "vg": "VG",
+    "g_plus": "G+",
+    "good": "Good",
+    "fair": "Fair",
+    "poor": "Poor"
+  },
+  "library": {
+    "title": "My Collection",
+    "empty": "No records yet. Start by scanning a vinyl!",
+    "grid": "Grid",
+    "list": "List",
+    "search": "Search records...",
+    "sortBy": "Sort by",
+    "filter": "Filter",
+    "folders": "Folders",
+    "addFolder": "New Folder",
+    "editFolder": "Edit Folder",
+    "deleteFolder": "Delete Folder",
+    "tags": "Tags",
+    "addTag": "Add Tag",
+    "export": "Export Collection",
+    "deleteConfirm": "Are you sure you want to delete this record?"
+  },
+  "compare": {
+    "title": "Compare",
+    "selectRecords": "Select records to compare",
+    "addRecord": "Add Record",
+    "remove": "Remove"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "currency": "Currency",
+    "about": "About",
+    "version": "Version",
+    "scanLimit": "Free scans remaining",
+    "purchase": "Unlock Full Version",
+    "purchased": "Full Version"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "search": "Search",
+    "noResults": "No results found"
+  }
+}

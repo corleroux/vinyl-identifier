@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 antialiased;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg
+      hover:bg-blue-700 active:bg-blue-800 transition-colors
+      disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply w-full py-3 px-6 bg-gray-100 text-gray-900 font-semibold rounded-lg
+      hover:bg-gray-200 active:bg-gray-300 transition-colors
+      disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+}
