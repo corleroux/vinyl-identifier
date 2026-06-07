@@ -10,13 +10,18 @@ interface ScanState {
   processingStep: string
   processingError: string | null
   report: VinylRecord | null
-  batchQueue: string[]
+  batchMode: boolean
+  batchQueue: VinylRecord[]
 
   setStage: (stage: ScanStage) => void
   setImage: (uri: string, blob: Blob | null) => void
   setProcessingStep: (step: string) => void
   setProcessingError: (error: string | null) => void
   setReport: (report: VinylRecord | null) => void
+  addToBatch: (record: VinylRecord) => void
+  removeFromBatch: (id: string) => void
+  clearBatch: () => void
+  toggleBatchMode: () => void
   reset: () => void
 }
 
@@ -27,6 +32,7 @@ export const useScanStore = create<ScanState>((set) => ({
   processingStep: 'vision',
   processingError: null,
   report: null,
+  batchMode: false,
   batchQueue: [],
 
   setStage: (stage) => set({ stage }),
@@ -34,6 +40,10 @@ export const useScanStore = create<ScanState>((set) => ({
   setProcessingStep: (step) => set({ processingStep: step }),
   setProcessingError: (error) => set({ processingError: error }),
   setReport: (report) => set({ report }),
+  addToBatch: (record) => set((s) => ({ batchQueue: [...s.batchQueue, record] })),
+  removeFromBatch: (id) => set((s) => ({ batchQueue: s.batchQueue.filter((r) => r.id !== id) })),
+  clearBatch: () => set({ batchQueue: [] }),
+  toggleBatchMode: () => set((s) => ({ batchMode: !s.batchMode })),
   reset: () =>
     set({
       stage: 'idle',
@@ -42,5 +52,7 @@ export const useScanStore = create<ScanState>((set) => ({
       processingStep: 'vision',
       processingError: null,
       report: null,
+      batchQueue: [],
+      batchMode: false,
     }),
 }))

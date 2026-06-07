@@ -16,6 +16,8 @@ export function ProcessingScreen() {
   const setProcessingStep = useScanStore((s) => s.setProcessingStep)
   const setProcessingError = useScanStore((s) => s.setProcessingError)
   const setReport = useScanStore((s) => s.setReport)
+  const addToBatch = useScanStore((s) => s.addToBatch)
+  const batchMode = useScanStore((s) => s.batchMode)
   const reset = useScanStore((s) => s.reset)
   const incrementScanCount = useAppStore((s) => s.incrementScanCount)
 
@@ -43,7 +45,12 @@ export function ProcessingScreen() {
           createdAt: Date.now(),
         })
 
-        navigate(`/report/${record.id}`, { replace: true })
+        if (batchMode) {
+          addToBatch(record)
+          navigate('/scan/camera', { replace: true })
+        } else {
+          navigate(`/report/${record.id}`, { replace: true })
+        }
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Unknown error'
         setProcessingError(message)
@@ -52,7 +59,16 @@ export function ProcessingScreen() {
     }
 
     process()
-  }, [imageBlob, navigate, setProcessingStep, setProcessingError, setReport, incrementScanCount])
+  }, [
+    imageBlob,
+    navigate,
+    setProcessingStep,
+    setProcessingError,
+    setReport,
+    incrementScanCount,
+    addToBatch,
+    batchMode,
+  ])
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 gap-8">

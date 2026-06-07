@@ -7,7 +7,9 @@ import { BarcodeScreen } from '@/screens/BarcodeScreen'
 import { ProcessingScreen } from '@/screens/ProcessingScreen'
 import { ManualInputScreen } from '@/screens/ManualInputScreen'
 import { ReportScreen } from '@/screens/ReportScreen'
+import { BatchSessionScreen } from '@/screens/BatchSessionScreen'
 import { LibraryScreen } from '@/screens/LibraryScreen'
+import { ScanHistoryScreen } from '@/screens/ScanHistoryScreen'
 import { CompareScreen } from '@/screens/CompareScreen'
 import { SettingsScreen } from '@/screens/SettingsScreen'
 
@@ -22,7 +24,9 @@ export default function App() {
       <Route path="/scan/processing" element={<ProcessingScreen />} />
       <Route path="/scan/manual" element={<ManualInputScreen />} />
       <Route path="/report/:id" element={<ReportScreen />} />
+      <Route path="/batch" element={<BatchSessionScreen />} />
       <Route path="/library" element={<LibraryScreen />} />
+      <Route path="/library/history" element={<ScanHistoryScreen />} />
       <Route path="/compare" element={<CompareScreen />} />
       <Route path="/settings" element={<SettingsScreen />} />
     </Routes>

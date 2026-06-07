@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams, useNavigate } from 'react-router-dom'
 import { RarityBadge } from '@/components/RarityBadge'
@@ -7,6 +7,7 @@ import { CurrencySelector } from '@/components/CurrencySelector'
 import { useScanStore } from '@/store/useScanStore'
 import { useAppStore } from '@/store/useAppStore'
 import { db } from '@/db'
+import { exportReportAsImage, shareReport } from '@/utils/export'
 import type { VinylRecord, VinylCondition, Currency } from '@/types'
 
 export function ReportScreen() {
@@ -14,7 +15,9 @@ export function ReportScreen() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const report = useScanStore((s) => s.report)
+  const batchMode = useScanStore((s) => s.batchMode)
   const globalCurrency = useAppStore((s) => s.currency)
+  const reportRef = useRef<HTMLDivElement>(null)
   const [saved, setSaved] = useState(false)
   const [record, setRecord] = useState<VinylRecord | null>(report)
   const [condition, setCondition] = useState<VinylCondition>(report?.condition ?? 'vg')
@@ -72,9 +75,20 @@ export function ReportScreen() {
     setTimeout(() => setSaved(false), 2000)
   }
 
+  async function handleExport() {
+    if (!record || !reportRef.current) return
+    const filename = `${record.artist}-${record.album}`.replace(/[^a-zA-Z0-9]/g, '_')
+    await exportReportAsImage(reportRef.current, filename)
+  }
+
+  async function handleShare() {
+    if (!record) return
+    await shareReport(record)
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex-1 overflow-y-auto p-6 pb-32">
+      <div ref={reportRef} className="flex-1 overflow-y-auto p-6 pb-32">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold">{t('report.title')}</h1>
           <RarityBadge tier={record.rarityTier} />
@@ -189,14 +203,24 @@ export function ReportScreen() {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t flex gap-3">
-        <button onClick={handleSave} className="btn-primary">
-          {saved ? '✓ ' : ''}
-          {t('report.saveToCollection')}
-        </button>
-        <button onClick={() => navigate('/')} className="btn-secondary w-24 flex-shrink-0">
-          {t('common.close')}
-        </button>
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t flex flex-col gap-2">
+        <div className="flex gap-3">
+          <button onClick={handleSave} className="btn-primary">
+            {saved ? '✓ ' : ''}
+            {t('report.saveToCollection')}
+          </button>
+          <button onClick={handleShare} className="btn-secondary w-24 flex-shrink-0">
+            {t('report.share')}
+          </button>
+          <button onClick={handleExport} className="btn-secondary w-24 flex-shrink-0">
+            {t('report.exportPdf')}
+          </button>
+        </div>
+        {batchMode && (
+          <button onClick={() => navigate('/batch')} className="btn-secondary">
+            Continue Scanning (Batch)
+          </button>
+        )}
       </div>
     </div>
   )
