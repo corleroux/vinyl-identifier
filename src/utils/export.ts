@@ -1,3 +1,4 @@
+import i18n from 'i18next'
 import type { VinylRecord } from '@/types'
 
 export async function exportReportAsImage(element: HTMLElement, filename: string): Promise<void> {
@@ -14,25 +15,40 @@ export async function exportReportAsImage(element: HTMLElement, filename: string
   URL.revokeObjectURL(url)
 }
 
-export async function shareReport(record: VinylRecord): Promise<void> {
-  const text = [
+function buildShareText(record: VinylRecord): string {
+  const t = i18n.t.bind(i18n)
+  return [
     `${record.artist} — ${record.album}`,
-    `Rarity: ${record.rarityTier}`,
-    `Value: $${record.estimatedValueLow} – $${record.estimatedValueHigh}`,
-    record.label ? `Label: ${record.label}` : '',
-    record.releaseYear ? `Year: ${record.releaseYear}` : '',
+    `${t('export.rarity')}: ${t(`rarity.${record.rarityTier}`)}`,
+    `${t('export.value')}: $${record.estimatedValueLow} – $${record.estimatedValueHigh}`,
+    record.label ? `${t('export.label')}: ${record.label}` : '',
+    record.releaseYear ? `${t('export.year')}: ${record.releaseYear}` : '',
   ]
     .filter(Boolean)
     .join('\n')
+}
 
-  if (navigator.share) {
-    await navigator.share({
-      title: `${record.artist} — ${record.album}`,
-      text,
-    })
-  } else {
-    await navigator.clipboard.writeText(text)
+export async function shareReport(record: VinylRecord): Promise<void> {
+  const title = `${record.artist} — ${record.album}`
+  const text = buildShareText(record)
+
+  // Try Capacitor Share plugin first (native platforms)
+  try {
+    const { Share } = await import('@capacitor/share')
+    await Share.share({ title, text })
+    return
+  } catch {
+    // Capacitor Share not available (web), fall through
   }
+
+  // Fall back to Web Share API (PWA / mobile browsers)
+  if (navigator.share) {
+    await navigator.share({ title, text })
+    return
+  }
+
+  // Final fallback: clipboard
+  await navigator.clipboard.writeText(text)
 }
 
 export function exportCollectionAsCSV(records: VinylRecord[]): void {

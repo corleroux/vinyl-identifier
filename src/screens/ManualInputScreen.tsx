@@ -39,13 +39,21 @@ export function ManualInputScreen() {
       <p className="text-sm text-gray-500 mb-6">{t('scan.error')}</p>
 
       <div className="flex flex-col gap-4">
+        <label htmlFor="manual-artist" className="sr-only">
+          {t('scan.artistPlaceholder')}
+        </label>
         <input
+          id="manual-artist"
           value={artist}
           onChange={(e) => setArtist(e.target.value)}
           placeholder={t('scan.artistPlaceholder')}
           className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+        <label htmlFor="manual-album" className="sr-only">
+          {t('scan.albumPlaceholder')}
+        </label>
         <input
+          id="manual-album"
           value={album}
           onChange={(e) => setAlbum(e.target.value)}
           placeholder={t('scan.albumPlaceholder')}

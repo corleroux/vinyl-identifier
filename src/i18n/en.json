@@ -15,7 +15,10 @@
     "camera": "Take Photo",
     "gallery": "Upload from Gallery",
     "barcode": "Scan Barcode",
-    "recentScans": "Recent Scans"
+    "recentScans": "Recent Scans",
+    "batchMode": "Batch mode ({{count}} scanned)",
+    "reviewBatch": "Review Batch ({{count}} records)",
+    "scanDate": "Scan {{date}}"
   },
   "scan": {
     "frameGuide": "Frame the vinyl in the guide area",
@@ -29,7 +32,9 @@
     "manualFallback": "Enter the artist and album manually",
     "artistPlaceholder": "Artist name",
     "albumPlaceholder": "Album title",
-    "submit": "Identify"
+    "submit": "Identify",
+    "barcodePlaceholder": "Enter barcode number",
+    "previewAlt": "Photograph of vinyl record"
   },
   "report": {
     "title": "Rarity Report",
@@ -49,7 +54,8 @@
     "notes": "Notes",
     "saveToCollection": "Save to Collection",
     "share": "Share",
-    "exportPdf": "Export as PDF"
+    "exportPdf": "Export as PDF",
+    "notesPlaceholder": "Add notes..."
   },
   "rarity": {
     "common": "Common",
@@ -82,8 +88,34 @@
     "deleteFolder": "Delete Folder",
     "tags": "Tags",
     "addTag": "Add Tag",
+    "editTag": "Edit Tag",
+    "tagName": "Tag name",
     "export": "Export Collection",
-    "deleteConfirm": "Are you sure you want to delete this record?"
+    "deleteConfirm": "Are you sure you want to delete this record?",
+    "folderName": "Folder name",
+    "noFolder": "No folder",
+    "allFolders": "All",
+    "allRarity": "All",
+    "sortArtist": "Artist",
+    "sortAlbum": "Album",
+    "sortYear": "Year",
+    "sortValue": "Value",
+    "sortRarity": "Rarity",
+    "sortDate": "Date",
+    "exportCsv": "Export CSV",
+    "exportJson": "Export JSON",
+    "clearAll": "Clear All",
+    "historyEmpty": "No scan history yet.",
+    "batchReview": "Batch Review",
+    "batchEmpty": "No records in batch.",
+    "saveAll": "Save All",
+    "discard": "Discard",
+    "continueBatch": "Continue Scanning (Batch)",
+    "tagOr": "OR",
+    "tagAnd": "AND",
+    "dateFrom": "From date",
+    "dateTo": "To date",
+    "resultsCount": "{{count}} results"
   },
   "compare": {
     "title": "Compare",
@@ -111,6 +143,30 @@
     "error": "Something went wrong",
     "retry": "Retry",
     "search": "Search",
-    "noResults": "No results found"
+    "noResults": "No results found",
+    "offline": "You're offline. Some features may be unavailable.",
+    "unknownError": "Unknown error",
+    "sortBy": "Sort by"
+  },
+  "export": {
+    "rarity": "Rarity",
+    "value": "Value",
+    "label": "Label",
+    "year": "Year",
+    "csvArtist": "Artist",
+    "csvAlbum": "Album",
+    "csvLabel": "Label",
+    "csvCatalogNumber": "Catalog #",
+    "csvCountry": "Country",
+    "csvYear": "Year",
+    "csvFormat": "Format",
+    "csvRarity": "Rarity",
+    "csvValueLow": "Value Low",
+    "csvValueHigh": "Value High",
+    "csvCurrency": "Currency",
+    "csvCondition": "Condition",
+    "csvNotes": "Notes",
+    "csvFilename": "vinyl-collection",
+    "jsonFilename": "vinyl-collection"
   }
 }

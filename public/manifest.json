@@ -3,9 +3,12 @@
   "short_name": "VinylID",
   "description": "Identify vinyl records and discover their rarity and value",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
+  "orientation": "portrait",
+  "categories": ["music", "utilities"],
   "icons": [
     {
       "src": "/icons/icon-192.png",
@@ -16,6 +19,12 @@
       "src": "/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

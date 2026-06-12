@@ -42,14 +42,14 @@ export function ScanHistoryScreen() {
             }}
             className="text-sm text-red-600"
           >
-            Clear All
+            {t('library.clearAll')}
           </button>
         )}
       </div>
 
       {scans.length === 0 ? (
         <div className="flex-1 flex items-center justify-center">
-          <p className="text-gray-500">No scan history yet.</p>
+          <p className="text-gray-500">{t('library.historyEmpty')}</p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -65,12 +65,13 @@ export function ScanHistoryScreen() {
                     {scan.record.artist} — {scan.record.album}
                   </p>
                   <p className="text-sm text-gray-500">
-                    {new Date(scan.createdAt).toLocaleDateString()} · {scan.record.rarityTier}
+                    {new Date(scan.createdAt).toLocaleDateString()} ·{' '}
+                    {t(`rarity.${scan.record.rarityTier}`)}
                   </p>
                 </div>
               ) : (
-                <p className="text-gray-400">
-                  Scan {new Date(scan.createdAt).toLocaleDateString()}
+                <p className="text-gray-500">
+                  {t('home.scanDate', { date: new Date(scan.createdAt).toLocaleDateString() })}
                 </p>
               )}
             </button>

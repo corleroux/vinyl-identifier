@@ -23,31 +23,31 @@ export function HomeScreen() {
         <h1 className="text-3xl font-bold">{t('home.title')}</h1>
         <p className="text-lg text-center text-gray-600">{t('home.subtitle')}</p>
 
-        <div className="flex flex-col gap-4 w-full max-w-sm">
-          <button onClick={() => navigate('/scan/camera')} className="btn-primary">
+        <nav aria-label="Scan options" className="flex flex-col gap-4 w-full max-w-sm">
+          <button onClick={() => navigate('/scan/camera')} className="btn-primary min-h-[48px]">
             {t('home.camera')}
           </button>
-          <button onClick={() => navigate('/scan/gallery')} className="btn-secondary">
+          <button onClick={() => navigate('/scan/gallery')} className="btn-secondary min-h-[48px]">
             {t('home.gallery')}
           </button>
-          <button onClick={() => navigate('/scan/barcode')} className="btn-secondary">
+          <button onClick={() => navigate('/scan/barcode')} className="btn-secondary min-h-[48px]">
             {t('home.barcode')}
           </button>
-        </div>
+        </nav>
 
-        <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+        <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer min-h-[44px]">
           <input
             type="checkbox"
             checked={batchMode}
             onChange={toggleBatchMode}
-            className="rounded"
+            className="rounded w-5 h-5"
           />
-          Batch mode ({batchQueue.length} scanned)
+          {t('home.batchMode', { count: batchQueue.length })}
         </label>
 
         {batchQueue.length > 0 && (
           <button onClick={() => navigate('/batch')} className="btn-secondary max-w-sm">
-            Review Batch ({batchQueue.length} records)
+            {t('home.reviewBatch', { count: batchQueue.length })}
           </button>
         )}
       </div>
@@ -69,8 +69,8 @@ export function HomeScreen() {
                     <span className="text-gray-600">{scan.record.album}</span>
                   </span>
                 ) : (
-                  <span className="text-gray-400">
-                    Scan {new Date(scan.createdAt).toLocaleDateString()}
+                  <span className="text-gray-500">
+                    {t('home.scanDate', { date: new Date(scan.createdAt).toLocaleDateString() })}
                   </span>
                 )}
               </button>

@@ -1,0 +1,5 @@
+{
+  "name": "vinyl-identifier",
+  "compatibility_date": "2026-06-08",
+  "main": "src/index.ts"
+}

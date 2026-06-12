@@ -1,12 +1,25 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @layer base {
+  html {
+    font-size: clamp(16px, 1rem, 20px);
+  }
+
   body {
     @apply bg-white text-gray-900 antialiased;
   }
 
   button {
     @apply cursor-pointer;
+  }
+
+  /* Ensure minimum touch target size for interactive elements */
+  input[type='text'],
+  input[type='date'],
+  input[type='number'],
+  select,
+  textarea {
+    @apply min-h-[44px];
   }
 }
 
@@ -21,5 +34,16 @@
     @apply w-full py-3 px-6 bg-gray-100 text-gray-900 font-semibold rounded-lg
       hover:bg-gray-200 active:bg-gray-300 transition-colors
       disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+}
+
+/* Dynamic type scaling support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

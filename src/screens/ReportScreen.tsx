@@ -8,6 +8,7 @@ import { useScanStore } from '@/store/useScanStore'
 import { useAppStore } from '@/store/useAppStore'
 import { db } from '@/db'
 import { exportReportAsImage, shareReport } from '@/utils/export'
+import { formatCurrency } from '@/utils/format'
 import type { VinylRecord, VinylCondition, Currency } from '@/types'
 
 export function ReportScreen() {
@@ -50,15 +51,6 @@ export function ReportScreen() {
     )
   }
 
-  function formatValue(val: number): string {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: selectedCurrency,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(val)
-  }
-
   async function handleSave() {
     if (!record) return
     const updated: VinylRecord = {
@@ -89,10 +81,10 @@ export function ReportScreen() {
   return (
     <div className="flex flex-col min-h-screen">
       <div ref={reportRef} className="flex-1 overflow-y-auto p-6 pb-32">
-        <div className="flex items-center justify-between mb-6">
+        <header className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold">{t('report.title')}</h1>
           <RarityBadge tier={record.rarityTier} />
-        </div>
+        </header>
 
         <div className="space-y-4">
           <div>
@@ -141,7 +133,8 @@ export function ReportScreen() {
             <p className="text-sm text-gray-500 mb-1">{t('report.estimatedValue')}</p>
             <div className="flex items-center gap-3">
               <p className="text-2xl font-bold text-blue-600">
-                {formatValue(record.estimatedValueLow)} – {formatValue(record.estimatedValueHigh)}
+                {formatCurrency(record.estimatedValueLow, selectedCurrency)} –{' '}
+                {formatCurrency(record.estimatedValueHigh, selectedCurrency)}
               </p>
               <CurrencySelector value={selectedCurrency} onChange={setSelectedCurrency} />
             </div>
@@ -154,6 +147,21 @@ export function ReportScreen() {
           {record.priceHistory && (
             <div className="border-t pt-4">
               <p className="text-sm text-gray-500 mb-1">{t('report.priceHistory')}</p>
+              <div className="mt-2 mb-3">
+                <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden">
+                  <div
+                    className="absolute h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"
+                    style={{
+                      left: `${Math.min(10, (record.estimatedValueLow / Math.max(record.estimatedValueHigh, 1)) * 100)}%`,
+                      width: `${Math.max(5, ((record.estimatedValueHigh - record.estimatedValueLow) / Math.max(record.estimatedValueHigh, 1)) * 100)}%`,
+                    }}
+                  />
+                </div>
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>{formatCurrency(record.estimatedValueLow, selectedCurrency)}</span>
+                  <span>{formatCurrency(record.estimatedValueHigh, selectedCurrency)}</span>
+                </div>
+              </div>
               <p className="text-sm">{record.priceHistory}</p>
             </div>
           )}
@@ -191,13 +199,16 @@ export function ReportScreen() {
           )}
 
           <div className="border-t pt-4">
-            <p className="text-sm text-gray-500 mb-2">{t('report.notes')}</p>
+            <label htmlFor="report-notes" className="text-sm text-gray-500 mb-2 block">
+              {t('report.notes')}
+            </label>
             <textarea
+              id="report-notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={3}
               className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Add notes..."
+              placeholder={t('report.notesPlaceholder')}
             />
           </div>
         </div>
@@ -218,7 +229,7 @@ export function ReportScreen() {
         </div>
         {batchMode && (
           <button onClick={() => navigate('/batch')} className="btn-secondary">
-            Continue Scanning (Batch)
+            {t('library.continueBatch')}
           </button>
         )}
       </div>

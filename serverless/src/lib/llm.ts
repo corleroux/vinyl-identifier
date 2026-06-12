@@ -1,3 +1,5 @@
+import type { Env } from '../env'
+
 export interface VisionResult {
   artist: string
   album: string
@@ -27,18 +29,14 @@ export interface ResearchResult {
   }>
 }
 
-const VISION_MODEL = process.env.VISION_LLM_MODEL ?? 'gpt-4o'
-const RESEARCH_MODEL = process.env.RESEARCH_LLM_MODEL ?? 'gpt-4o'
-const VISION_API_KEY = process.env.VISION_LLM_API_KEY ?? ''
-const RESEARCH_API_KEY = process.env.RESEARCH_LLM_API_KEY ?? VISION_API_KEY
-
-async function callOpenAI(
+async function callLLM(
+  endpoint: string,
   model: string,
   apiKey: string,
   messages: Array<{ role: string; content: string | Array<unknown> }>,
   responseFormat: 'json_object' | 'text' = 'json_object',
 ): Promise<Record<string, unknown>> {
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+  const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -53,7 +51,8 @@ async function callOpenAI(
   })
 
   if (!response.ok) {
-    throw new Error(`LLM API error: ${response.status} ${await response.text()}`)
+    const body = await response.text()
+    throw new Error(`LLM API error (${model}): ${response.status} ${body}`)
   }
 
   const data = (await response.json()) as {
@@ -65,26 +64,32 @@ async function callOpenAI(
 export async function identifyWithVision(
   imageBuffer: ArrayBuffer,
   contentType: string,
+  env: Env,
 ): Promise<VisionResult> {
   const base64 = btoa(
     new Uint8Array(imageBuffer).reduce((acc, byte) => acc + String.fromCharCode(byte), ''),
   )
 
-  const result = await callOpenAI(VISION_MODEL, VISION_API_KEY, [
-    {
-      role: 'user',
-      content: [
-        {
-          type: 'text',
-          text: 'Identify this vinyl record from the image. Return JSON with: artist, album, label, catalogNumber (as string or null), confidence (0-1).',
-        },
-        {
-          type: 'image_url',
-          image_url: { url: `data:${contentType};base64,${base64}` },
-        },
-      ],
-    },
-  ])
+  const result = await callLLM(
+    env.VISION_LLM_ENDPOINT,
+    env.VISION_LLM_MODEL,
+    env.VISION_LLM_API_KEY,
+    [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'text',
+            text: 'Identify this vinyl record from the image. Return JSON with: artist, album, label, catalogNumber (as string or null), confidence (0-1).',
+          },
+          {
+            type: 'image_url',
+            image_url: { url: `data:${contentType};base64,${base64}` },
+          },
+        ],
+      },
+    ],
+  )
 
   return {
     artist: (result.artist as string) ?? 'Unknown Artist',
@@ -95,7 +100,10 @@ export async function identifyWithVision(
   }
 }
 
-export async function researchWithLLM(identification: VisionResult): Promise<ResearchResult> {
+export async function researchWithLLM(
+  identification: VisionResult,
+  env: Env,
+): Promise<ResearchResult> {
   const prompt = `You are a vinyl record rarity expert. Given the following record identification, provide a detailed rarity and value assessment.
 
 Artist: ${identification.artist}
@@ -113,9 +121,12 @@ Return JSON with exactly:
 - variants: array of { label, catalogNumber, country, year, format }
 - similarReleases: array of { artist, album, year }`
 
-  const result = await callOpenAI(RESEARCH_MODEL, RESEARCH_API_KEY, [
-    { role: 'user', content: prompt },
-  ])
+  const result = await callLLM(
+    env.RESEARCH_LLM_ENDPOINT,
+    env.RESEARCH_LLM_MODEL,
+    env.RESEARCH_LLM_API_KEY,
+    [{ role: 'user', content: prompt }],
+  )
 
   return {
     rarityTier: (result.rarityTier as string) ?? 'common',

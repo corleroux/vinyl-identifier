@@ -59,10 +59,14 @@ export function BarcodeScreen() {
       <h2 className="text-xl font-bold mb-6">{t('home.barcode')}</h2>
 
       <div className="flex flex-col gap-4">
+        <label htmlFor="barcode-input" className="sr-only">
+          {t('scan.barcodePlaceholder')}
+        </label>
         <input
+          id="barcode-input"
           value={barcode}
           onChange={(e) => setBarcode(e.target.value)}
-          placeholder="Enter barcode number"
+          placeholder={t('scan.barcodePlaceholder')}
           className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button

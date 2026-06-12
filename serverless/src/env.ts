@@ -1,0 +1,11 @@
+export interface Env {
+  VISION_LLM_API_KEY: string
+  RESEARCH_LLM_API_KEY: string
+  VISION_LLM_MODEL: string
+  RESEARCH_LLM_MODEL: string
+  VISION_LLM_ENDPOINT: string
+  RESEARCH_LLM_ENDPOINT: string
+  DISCOGS_CONSUMER_KEY: string
+  DISCOGS_CONSUMER_SECRET: string
+  ALLOWED_ORIGINS: string
+}

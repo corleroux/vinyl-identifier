@@ -1,0 +1,15 @@
+{
+  "name": "vinyl-identifier-serverless",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "cd .. && vitest run serverless/src/__tests__"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.0.0",
+    "wrangler": "^4.0.0"
+  }
+}

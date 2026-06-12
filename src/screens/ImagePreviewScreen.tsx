@@ -16,7 +16,12 @@ export function ImagePreviewScreen() {
 
   return (
     <div className="flex flex-col min-h-screen bg-black">
-      <img src={imageUri} alt="Preview" className="flex-1 object-contain p-4" />
+      <img
+        src={imageUri}
+        alt={t('scan.previewAlt')}
+        loading="lazy"
+        className="flex-1 object-contain p-4"
+      />
 
       <div className="p-6 bg-white rounded-t-2xl flex flex-col gap-4">
         <button

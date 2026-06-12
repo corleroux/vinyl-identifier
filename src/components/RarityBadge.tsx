@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { RarityTier } from '@/types'
 
@@ -13,7 +14,7 @@ interface RarityBadgeProps {
   tier: RarityTier
 }
 
-export function RarityBadge({ tier }: RarityBadgeProps) {
+export const RarityBadge = memo(function RarityBadge({ tier }: RarityBadgeProps) {
   const { t } = useTranslation()
 
   return (
@@ -23,4 +24,4 @@ export function RarityBadge({ tier }: RarityBadgeProps) {
       {t(`rarity.${tier}`)}
     </span>
   )
-}
+})

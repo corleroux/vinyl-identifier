@@ -6,6 +6,7 @@ import { useScanStore } from '@/store/useScanStore'
 import { identifyVinyl } from '@/services/api'
 import { db } from '@/db'
 import { useAppStore } from '@/store/useAppStore'
+import { trimScanHistory } from '@/utils/scanHistory'
 
 export function ProcessingScreen() {
   const { t } = useTranslation()
@@ -44,6 +45,7 @@ export function ProcessingScreen() {
           record,
           createdAt: Date.now(),
         })
+        await trimScanHistory()
 
         if (batchMode) {
           addToBatch(record)

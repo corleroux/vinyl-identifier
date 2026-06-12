@@ -73,6 +73,7 @@ export function CameraScreen() {
         ref={videoRef}
         autoPlay
         playsInline
+        aria-label="Camera preview"
         className="absolute inset-0 w-full h-full object-cover"
       />
       <canvas ref={canvasRef} className="hidden" />
@@ -90,6 +91,7 @@ export function CameraScreen() {
         </button>
         <button
           onClick={capture}
+          aria-label="Take photo"
           className="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center"
         >
           <div className="w-16 h-16 rounded-full bg-white" />

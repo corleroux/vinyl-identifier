@@ -1,5 +1,4 @@
-const DISCOGS_KEY = process.env.DISCOGS_CONSUMER_KEY ?? ''
-const DISCOGS_SECRET = process.env.DISCOGS_CONSUMER_SECRET ?? ''
+import type { Env } from '../env'
 
 export interface DiscogsResult {
   artist: string
@@ -17,16 +16,16 @@ export interface DiscogsResult {
   blockMedianPrice: number | null
 }
 
-function discogsHeaders(): Record<string, string> {
+function discogsHeaders(env: Env): Record<string, string> {
   return {
     'User-Agent': 'VinylIdentifier/1.0',
-    Authorization: `Discogs key=${DISCOGS_KEY}, secret=${DISCOGS_SECRET}`,
+    Authorization: `Discogs key=${env.DISCOGS_CONSUMER_KEY}, secret=${env.DISCOGS_CONSUMER_SECRET}`,
   }
 }
 
-export async function searchByBarcode(barcode: string): Promise<DiscogsResult | null> {
+export async function searchByBarcode(barcode: string, env: Env): Promise<DiscogsResult | null> {
   const url = `https://api.discogs.com/database/search?barcode=${encodeURIComponent(barcode)}&type=release&per_page=1`
-  const response = await fetch(url, { headers: discogsHeaders() })
+  const response = await fetch(url, { headers: discogsHeaders(env) })
 
   if (!response.ok) return null
 
@@ -51,7 +50,7 @@ export async function searchByBarcode(barcode: string): Promise<DiscogsResult | 
   const [artist, ...titleParts] = r.title.split(' - ')
 
   const priceData = await fetch(`https://api.discogs.com/marketplace/stats/${r.id}`, {
-    headers: discogsHeaders(),
+    headers: discogsHeaders(env),
   })
   const prices = priceData.ok
     ? ((await priceData.json()) as {
@@ -82,9 +81,10 @@ export async function searchByBarcode(barcode: string): Promise<DiscogsResult | 
 export async function searchByArtistAlbum(
   artist: string,
   album: string,
+  env: Env,
 ): Promise<DiscogsResult | null> {
   const url = `https://api.discogs.com/database/search?artist=${encodeURIComponent(artist)}&release_title=${encodeURIComponent(album)}&type=release&per_page=1`
-  const response = await fetch(url, { headers: discogsHeaders() })
+  const response = await fetch(url, { headers: discogsHeaders(env) })
 
   if (!response.ok) return null
 
@@ -104,5 +104,5 @@ export async function searchByArtistAlbum(
 
   if (!data.results?.length) return null
 
-  return searchByBarcode(data.results[0].catno)
+  return searchByBarcode(data.results[0].catno, env)
 }

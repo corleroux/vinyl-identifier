@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import type { Currency } from '@/types'
 
 const currencies: Currency[] = ['USD', 'EUR', 'GBP']
@@ -7,7 +8,10 @@ interface CurrencySelectorProps {
   onChange: (currency: Currency) => void
 }
 
-export function CurrencySelector({ value, onChange }: CurrencySelectorProps) {
+export const CurrencySelector = memo(function CurrencySelector({
+  value,
+  onChange,
+}: CurrencySelectorProps) {
   return (
     <div className="flex gap-2">
       {currencies.map((c) => (
@@ -26,4 +30,4 @@ export function CurrencySelector({ value, onChange }: CurrencySelectorProps) {
       ))}
     </div>
   )
-}
+})

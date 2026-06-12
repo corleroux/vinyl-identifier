@@ -1,2 +1,9 @@
-export { identifyVinyl, searchDiscogsBarcode, searchDiscogsByArtistAlbum } from './api'
+export {
+  identifyVinyl,
+  searchDiscogsBarcode,
+  searchDiscogsByArtistAlbum,
+  NetworkError,
+  OfflineError,
+  isOffline,
+} from './api'
 export type { IdentifyResponse, DiscogsBarcodeResult } from './api'

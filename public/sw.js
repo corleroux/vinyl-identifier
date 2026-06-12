@@ -19,9 +19,12 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const { request } = event
+  const url = new URL(request.url)
 
-  if (request.url.includes('/api/')) {
+  if (url.pathname.startsWith('/api/')) {
     event.respondWith(networkFirst(request))
+  } else if (request.mode === 'navigate') {
+    event.respondWith(navigationFallback(request))
   } else {
     event.respondWith(cacheFirst(request))
   }
@@ -57,5 +60,20 @@ async function networkFirst(request) {
       status: 503,
       headers: { 'Content-Type': 'application/json' },
     })
+  }
+}
+
+async function navigationFallback(request) {
+  try {
+    const response = await fetch(request)
+    if (response.ok) {
+      const cache = await caches.open(CACHE_NAME)
+      cache.put(request, response.clone())
+    }
+    return response
+  } catch {
+    const cached = await caches.match('/index.html')
+    if (cached) return cached
+    return new Response('Offline', { status: 503 })
   }
 }

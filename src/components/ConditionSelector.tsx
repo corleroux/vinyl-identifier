@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { VinylCondition } from '@/types'
 
@@ -17,7 +18,10 @@ interface ConditionSelectorProps {
   onChange: (condition: VinylCondition) => void
 }
 
-export function ConditionSelector({ value, onChange }: ConditionSelectorProps) {
+export const ConditionSelector = memo(function ConditionSelector({
+  value,
+  onChange,
+}: ConditionSelectorProps) {
   const { t } = useTranslation()
 
   return (
@@ -38,4 +42,4 @@ export function ConditionSelector({ value, onChange }: ConditionSelectorProps) {
       </select>
     </div>
   )
-}
+})

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 interface Step {
@@ -16,11 +17,14 @@ interface ProgressIndicatorProps {
   error?: string
 }
 
-export function ProgressIndicator({ currentStep, error }: ProgressIndicatorProps) {
+export const ProgressIndicator = memo(function ProgressIndicator({
+  currentStep,
+  error,
+}: ProgressIndicatorProps) {
   const { t } = useTranslation()
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-sm">
+    <div className="flex flex-col gap-4 w-full max-w-sm" role="status" aria-live="polite">
       {steps.map((step, i) => {
         const isActive = step.key === currentStep
         const isDone = steps.findIndex((s) => s.key === currentStep) > i
@@ -41,10 +45,10 @@ export function ProgressIndicator({ currentStep, error }: ProgressIndicatorProps
           <div key={step.key} className="flex items-center gap-3">
             <span
               className={`flex items-center justify-center w-6 h-6 rounded-full text-sm font-bold
-                ${isDone ? 'bg-green-500 text-white' : ''}
-                ${isActive && !isError ? 'bg-blue-500 text-white' : ''}
+                ${isDone ? 'bg-green-600 text-white' : ''}
+                ${isActive && !isError ? 'bg-blue-600 text-white' : ''}
                 ${isActive && isError ? 'bg-red-500 text-white' : ''}
-                ${!isActive && !isDone ? 'bg-gray-200 text-gray-400' : ''}`}
+                ${!isActive && !isDone ? 'bg-gray-200 text-gray-500' : ''}`}
             >
               {statusIcon}
             </span>
@@ -58,4 +62,4 @@ export function ProgressIndicator({ currentStep, error }: ProgressIndicatorProps
       })}
     </div>
   )
-}
+})
