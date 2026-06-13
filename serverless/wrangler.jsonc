@@ -17,7 +17,7 @@
         "RESEARCH_LLM_MODEL": "google/gemma-4-31b-it",
         "VISION_LLM_ENDPOINT": "https://integrate.api.nvidia.com/v1/chat/completions",
         "RESEARCH_LLM_ENDPOINT": "https://integrate.api.nvidia.com/v1/chat/completions",
-        "ALLOWED_ORIGINS": "http://localhost:5173"
+        "ALLOWED_ORIGINS": "http://localhost:5173,https://localhost,capacitor://localhost"
       }
     }
   }

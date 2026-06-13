@@ -52,6 +52,7 @@ async function callLLM(
 
   if (!response.ok) {
     const body = await response.text()
+    console.error(`[llm] API error (${model}): ${response.status} ${body}`)
     throw new Error(`LLM API error (${model}): ${response.status} ${body}`)
   }
 
@@ -61,6 +62,7 @@ async function callLLM(
 
   const content = data.choices[0]?.message?.content
   if (!content) {
+    console.error(`[llm] Empty content from model: ${model}`)
     throw new Error(`LLM returned empty content (model: ${model})`)
   }
 

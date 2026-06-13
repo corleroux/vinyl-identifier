@@ -54,6 +54,7 @@ export function ProcessingScreen() {
           navigate(`/report/${record.id}`, { replace: true })
         }
       } catch (err) {
+        console.error('[scan] Identify failed:', err)
         const message = err instanceof Error ? err.message : 'Unknown error'
         setProcessingError(message)
         navigate('/scan/manual', { replace: true })

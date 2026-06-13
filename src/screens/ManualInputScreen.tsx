@@ -11,6 +11,7 @@ export function ManualInputScreen() {
   const [album, setAlbum] = useState('')
   const setReport = useScanStore((s) => s.setReport)
   const reset = useScanStore((s) => s.reset)
+  const processingError = useScanStore((s) => s.processingError)
 
   function handleSubmit() {
     if (!artist.trim() || !album.trim()) return
@@ -36,7 +37,9 @@ export function ManualInputScreen() {
   return (
     <div className="flex flex-col min-h-screen p-6">
       <h2 className="text-xl font-bold mb-2">{t('scan.manualFallback')}</h2>
-      <p className="text-sm text-gray-500 mb-6">{t('scan.error')}</p>
+      <p className="text-sm text-gray-500 mb-2">{t('scan.error')}</p>
+      {processingError && <p className="text-xs text-red-500 mb-6 font-mono">{processingError}</p>}
+      {!processingError && <div className="mb-6" />}
 
       <div className="flex flex-col gap-4">
         <label htmlFor="manual-artist" className="sr-only">
