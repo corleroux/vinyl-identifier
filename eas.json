@@ -17,7 +17,6 @@
     "preview": {
       "extends": "production",
       "distribution": "internal",
-      "config": "android-preview",
       "android": {
         "buildType": "apk"
       }
