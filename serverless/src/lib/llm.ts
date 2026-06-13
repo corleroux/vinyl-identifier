@@ -1,4 +1,7 @@
 import type { Env } from '../env'
+import { getProvider, type LLMMessage } from './llm/providers'
+
+const LLM_TIMEOUT = 25_000
 
 export interface VisionResult {
   artist: string
@@ -29,44 +32,59 @@ export interface ResearchResult {
   }>
 }
 
-async function callLLM(
-  endpoint: string,
-  model: string,
-  apiKey: string,
-  messages: Array<{ role: string; content: string | Array<unknown> }>,
-  responseFormat: 'json_object' | 'text' = 'json_object',
+function getProviderConfig(env: Env, providerName: string) {
+  switch (providerName) {
+    case 'gemini':
+      return {
+        provider: getProvider('gemini'),
+        endpoint: env.GEMINI_ENDPOINT,
+        apiKey: env.GEMINI_API_KEY,
+        model: env.GEMINI_MODEL,
+      }
+    case 'openai-compat':
+      return {
+        provider: getProvider('openai-compat'),
+        endpoint: env.OPENAI_COMPAT_ENDPOINT,
+        apiKey: env.OPENAI_COMPAT_API_KEY,
+        model: env.OPENAI_COMPAT_MODEL,
+      }
+    default:
+      throw new Error(`Unknown LLM provider: ${providerName}`)
+  }
+}
+
+async function callLLMWithFallback(
+  env: Env,
+  primaryMessages: LLMMessage[],
+  fallbackMessages: LLMMessage[],
+  isVision: boolean,
 ): Promise<Record<string, unknown>> {
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model,
-      messages,
-      response_format: responseFormat === 'json_object' ? { type: 'json_object' } : undefined,
-      temperature: 0.1,
-    }),
-  })
+  const primaryConfig = getProviderConfig(env, env.LLM_PROVIDER)
+  const messages = isVision ? primaryMessages : fallbackMessages
+  const model = primaryConfig.model
 
-  if (!response.ok) {
-    const body = await response.text()
-    console.error(`[llm] API error (${model}): ${response.status} ${body}`)
-    throw new Error(`LLM API error (${model}): ${response.status} ${body}`)
+  try {
+    const content = await primaryConfig.provider.complete(
+      primaryConfig.endpoint,
+      primaryConfig.apiKey,
+      { model, messages, timeout: LLM_TIMEOUT },
+    )
+    return JSON.parse(content) as Record<string, unknown>
+  } catch (err) {
+    const primaryName = env.LLM_PROVIDER
+    const fallbackName = env.LLM_FALLBACK_PROVIDER
+    console.warn(`[llm] ${primaryName} failed, trying fallback ${fallbackName}: ${err}`)
+
+    const fallbackConfig = getProviderConfig(env, fallbackName)
+    const fallbackModel = fallbackConfig.model
+
+    const content = await fallbackConfig.provider.complete(
+      fallbackConfig.endpoint,
+      fallbackConfig.apiKey,
+      { model: fallbackModel, messages, timeout: LLM_TIMEOUT },
+    )
+    return JSON.parse(content) as Record<string, unknown>
   }
-
-  const data = (await response.json()) as {
-    choices: Array<{ message: { content: string | null } }>
-  }
-
-  const content = data.choices[0]?.message?.content
-  if (!content) {
-    console.error(`[llm] Empty content from model: ${model}`)
-    throw new Error(`LLM returned empty content (model: ${model})`)
-  }
-
-  return JSON.parse(content) as Record<string, unknown>
 }
 
 export async function identifyWithVision(
@@ -78,26 +96,23 @@ export async function identifyWithVision(
     new Uint8Array(imageBuffer).reduce((acc, byte) => acc + String.fromCharCode(byte), ''),
   )
 
-  const result = await callLLM(
-    env.VISION_LLM_ENDPOINT,
-    env.VISION_LLM_MODEL,
-    env.VISION_LLM_API_KEY,
-    [
-      {
-        role: 'user',
-        content: [
-          {
-            type: 'text',
-            text: 'Identify this vinyl record from the image. Return JSON with: artist, album, label, catalogNumber (as string or null), confidence (0-1).',
-          },
-          {
-            type: 'image_url',
-            image_url: { url: `data:${contentType};base64,${base64}` },
-          },
-        ],
-      },
-    ],
-  )
+  const visionPrompt: LLMMessage[] = [
+    {
+      role: 'user',
+      content: [
+        {
+          type: 'text',
+          text: 'Identify this vinyl record from the image. Return JSON with: artist, album, label, catalogNumber (as string or null), confidence (0-1).',
+        },
+        {
+          type: 'image_url',
+          image_url: { url: `data:${contentType};base64,${base64}` },
+        },
+      ],
+    },
+  ]
+
+  const result = await callLLMWithFallback(env, visionPrompt, visionPrompt, true)
 
   return {
     artist: (result.artist as string) ?? 'Unknown Artist',
@@ -129,12 +144,9 @@ Return JSON with exactly:
 - variants: array of { label, catalogNumber, country, year, format }
 - similarReleases: array of { artist, album, year }`
 
-  const result = await callLLM(
-    env.RESEARCH_LLM_ENDPOINT,
-    env.RESEARCH_LLM_MODEL,
-    env.RESEARCH_LLM_API_KEY,
-    [{ role: 'user', content: prompt }],
-  )
+  const researchMessages: LLMMessage[] = [{ role: 'user', content: prompt }]
+
+  const result = await callLLMWithFallback(env, researchMessages, researchMessages, false)
 
   return {
     rarityTier: (result.rarityTier as string) ?? 'common',

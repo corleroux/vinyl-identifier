@@ -2,12 +2,14 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import type { Env } from '../env'
 
 const mockEnv: Env = {
-  VISION_LLM_API_KEY: 'test-vision-key',
-  RESEARCH_LLM_API_KEY: 'test-research-key',
-  VISION_LLM_MODEL: 'test-vision-model',
-  RESEARCH_LLM_MODEL: 'test-research-model',
-  VISION_LLM_ENDPOINT: 'https://api.test.com/v1/chat/completions',
-  RESEARCH_LLM_ENDPOINT: 'https://api.test.com/v1/chat/completions',
+  LLM_PROVIDER: 'gemini',
+  LLM_FALLBACK_PROVIDER: 'openai-compat',
+  GEMINI_API_KEY: 'test-gemini-key',
+  GEMINI_MODEL: 'test-gemini-model',
+  GEMINI_ENDPOINT: 'https://generativelanguage.googleapis.com/v1beta',
+  OPENAI_COMPAT_API_KEY: 'test-openai-key',
+  OPENAI_COMPAT_MODEL: 'test-openai-model',
+  OPENAI_COMPAT_ENDPOINT: 'https://api.test.com/v1/chat/completions',
   DISCOGS_CONSUMER_KEY: 'test-discogs-key',
   DISCOGS_CONSUMER_SECRET: 'test-discogs-secret',
   ALLOWED_ORIGINS: 'http://localhost:5173',
@@ -43,7 +45,7 @@ describe('handleIdentify', () => {
     expect(data.error).toMatch(/missing or invalid image/i)
   })
 
-  it('returns 500 when vision LLM fails', async () => {
+  it('returns 502 when vision LLM fails', async () => {
     const { handleIdentify } = await import('../functions/identify')
 
     vi.stubGlobal('fetch', mockFetchResponse({ error: 'model unavailable' }, false, 500))
@@ -69,21 +71,25 @@ describe('handleIdentify', () => {
       vi.fn().mockImplementation(async () => {
         callCount++
         if (callCount === 1) {
-          // Vision LLM response
+          // Vision LLM response (Gemini format)
           return {
             ok: true,
             json: () =>
               Promise.resolve({
-                choices: [
+                candidates: [
                   {
-                    message: {
-                      content: JSON.stringify({
-                        artist: 'Pink Floyd',
-                        album: 'The Dark Side of the Moon',
-                        label: 'Harvest',
-                        catalogNumber: 'SHVL 804',
-                        confidence: 0.95,
-                      }),
+                    content: {
+                      parts: [
+                        {
+                          text: JSON.stringify({
+                            artist: 'Pink Floyd',
+                            album: 'The Dark Side of the Moon',
+                            label: 'Harvest',
+                            catalogNumber: 'SHVL 804',
+                            confidence: 0.95,
+                          }),
+                        },
+                      ],
                     },
                   },
                 ],
@@ -91,32 +97,36 @@ describe('handleIdentify', () => {
           }
         }
         if (callCount === 2) {
-          // Research LLM response
+          // Research LLM response (Gemini format)
           return {
             ok: true,
             json: () =>
               Promise.resolve({
-                choices: [
+                candidates: [
                   {
-                    message: {
-                      content: JSON.stringify({
-                        rarityTier: 'uncommon',
-                        estimatedValueLow: 25,
-                        estimatedValueHigh: 80,
-                        currency: 'USD',
-                        condition: 'vg_plus',
-                        priceHistory: 'Steady demand.',
-                        variants: [],
-                        similarReleases: [],
-                      }),
+                    content: {
+                      parts: [
+                        {
+                          text: JSON.stringify({
+                            rarityTier: 'uncommon',
+                            estimatedValueLow: 25,
+                            estimatedValueHigh: 80,
+                            currency: 'USD',
+                            condition: 'vg_plus',
+                            priceHistory: 'Steady demand.',
+                            variants: [],
+                            similarReleases: [],
+                          }),
+                        },
+                      ],
                     },
                   },
                 ],
               }),
           }
-          // Discogs response
-          return { ok: false }
         }
+        // Discogs response
+        return { ok: false }
       }),
     )
 

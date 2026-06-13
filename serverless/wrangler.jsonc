@@ -13,10 +13,12 @@
       "name": "vinyl-identifier-staging",
       "workers_dev": true,
       "vars": {
-        "VISION_LLM_MODEL": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
-        "RESEARCH_LLM_MODEL": "google/gemma-4-31b-it",
-        "VISION_LLM_ENDPOINT": "https://integrate.api.nvidia.com/v1/chat/completions",
-        "RESEARCH_LLM_ENDPOINT": "https://integrate.api.nvidia.com/v1/chat/completions",
+        "LLM_PROVIDER": "openai-compat",
+        "LLM_FALLBACK_PROVIDER": "gemini",
+        "GEMINI_ENDPOINT": "https://generativelanguage.googleapis.com/v1beta",
+        "GEMINI_MODEL": "gemini-2.0-flash",
+        "OPENAI_COMPAT_ENDPOINT": "https://integrate.api.nvidia.com/v1/chat/completions",
+        "OPENAI_COMPAT_MODEL": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
         "ALLOWED_ORIGINS": "http://localhost:5173,https://localhost,capacitor://localhost"
       }
     }
