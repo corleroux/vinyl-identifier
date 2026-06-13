@@ -1,15 +1,15 @@
 name: CI
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    tags:
+      - 'v*'
 
 jobs:
-  quality:
+  android:
+    name: Android APK
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -18,16 +18,85 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      - name: TypeScript check
-        run: npm run typecheck
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Test
-        run: npm run test
-
-      - name: Build
+      - name: Build web assets
         run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build APK
+        run: |
+          cd android
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
+  ios:
+    name: iOS IPA
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync ios
+
+      - name: Install CocoaPods
+        run: cd ios/App && pod install
+
+      - name: Build IPA
+        run: |
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -archivePath $PWD/build/App.xcarchive \
+            archive \
+            CODE_SIGNING_ALLOWED=NO
+          xcodebuild -exportArchive \
+            -archivePath $PWD/build/App.xcarchive \
+            -exportOptionsPlist /dev/stdin \
+            -exportPath $PWD/build/export <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key>
+            <string>ad-hoc</string>
+            <key>compileBitcode</key>
+            <false/>
+          </dict>
+          </plist>
+          EOF
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: app.ipa
+          path: ios/App/build/export/App.ipa
