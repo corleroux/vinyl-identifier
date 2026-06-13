@@ -5,7 +5,7 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export function LazyImage({ src, alt, fallback = '💿', className, ...props }: LazyImageProps) {
-  const ref = useRef<HTMLImageElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const [loaded, setLoaded] = useState(false)
   const [inView, setInView] = useState(false)
 
@@ -26,25 +26,22 @@ export function LazyImage({ src, alt, fallback = '💿', className, ...props }: 
     return () => observer.disconnect()
   }, [])
 
-  if (!src || !inView) {
-    return (
-      <div className={className}>
+  return (
+    <div ref={ref} className={className}>
+      {inView && src ? (
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover"
+          onLoad={() => setLoaded(true)}
+          style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.2s' }}
+          {...props}
+        />
+      ) : (
         <span className="text-2xl" aria-hidden="true">
           {fallback}
         </span>
-      </div>
-    )
-  }
-
-  return (
-    <img
-      ref={ref}
-      src={src}
-      alt={alt}
-      className={className}
-      onLoad={() => setLoaded(true)}
-      style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.2s' }}
-      {...props}
-    />
+      )}
+    </div>
   )
 }

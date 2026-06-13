@@ -13,7 +13,7 @@ export function BottomNav() {
 
   return (
     <nav
-      aria-label="Main navigation"
+      aria-label={t('common.mainNavigation')}
       className="fixed bottom-0 left-0 right-0 bg-white border-t z-40"
     >
       <ul className="flex justify-around">

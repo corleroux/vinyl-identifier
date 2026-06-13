@@ -14,15 +14,18 @@ const RARITY_ORDER: Record<RarityTier, number> = {
   legendary: 4,
 }
 
-function Delta({ current, next }: { current: number; next: number | null }) {
+function Delta({ current, next, label }: { current: number; next: number | null; label?: string }) {
   if (next === null) return null
   const diff = current - next
   if (diff === 0) return null
+  const isHigher = diff > 0
   return (
     <span
-      className={`text-xs ml-1 px-1.5 py-0.5 rounded ${diff > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}
+      className={`text-xs ml-1 px-1.5 py-0.5 rounded ${isHigher ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}
+      aria-label={`${label ? `${label}: ` : ''}${isHigher ? '+' : ''}${diff.toLocaleString()}`}
     >
-      {diff > 0 ? '▲' : '▼'} {Math.abs(diff).toLocaleString()}
+      <span aria-hidden="true">{isHigher ? '▲' : '▼'} </span>
+      {Math.abs(diff).toLocaleString()}
     </span>
   )
 }
@@ -65,6 +68,7 @@ export function CompareScreen() {
               e.target.value = ''
             }}
             value=""
+            aria-label={t('common.selectRecord')}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
           >
             <option value="">{t('compare.addRecord')}</option>
@@ -116,6 +120,7 @@ export function CompareScreen() {
                         <Delta
                           current={record.estimatedValueHigh}
                           next={next?.estimatedValueHigh ?? null}
+                          label={t('report.estimatedValue')}
                         />
                       </div>
                     </div>
@@ -132,10 +137,17 @@ export function CompareScreen() {
                                   ? 'bg-green-100 text-green-700'
                                   : 'bg-red-100 text-red-700'
                               }`}
+                              aria-label={
+                                RARITY_ORDER[record.rarityTier] > RARITY_ORDER[next.rarityTier]
+                                  ? t('common.higher')
+                                  : t('common.lower')
+                              }
                             >
-                              {RARITY_ORDER[record.rarityTier] > RARITY_ORDER[next.rarityTier]
-                                ? '▲'
-                                : '▼'}
+                              <span aria-hidden="true">
+                                {RARITY_ORDER[record.rarityTier] > RARITY_ORDER[next.rarityTier]
+                                  ? '▲'
+                                  : '▼'}
+                              </span>
                             </span>
                           )}
                       </div>

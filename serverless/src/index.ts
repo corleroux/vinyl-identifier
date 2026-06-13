@@ -31,11 +31,15 @@ export default {
     }
 
     if (url.pathname === '/api/identify' && request.method === 'POST') {
-      return handleIdentify(request, env)
+      const res = await handleIdentify(request, env)
+      Object.entries(corsHeaders(origin, env)).forEach(([k, v]) => res.headers.set(k, v))
+      return res
     }
 
     if (url.pathname === '/api/discogs' && request.method === 'GET') {
-      return handleDiscogs(request, env)
+      const res = await handleDiscogs(request, env)
+      Object.entries(corsHeaders(origin, env)).forEach(([k, v]) => res.headers.set(k, v))
+      return res
     }
 
     return json(JSON.stringify({ error: 'Not Found' }), 404, origin, env)

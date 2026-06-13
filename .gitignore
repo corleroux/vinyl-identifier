@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 .env
 serverless/.wrangler/
+
+# EAS
+.eas/credentials.json
+*.jks
+*.keystore

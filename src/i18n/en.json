@@ -18,7 +18,8 @@
     "recentScans": "Recent Scans",
     "batchMode": "Batch mode ({{count}} scanned)",
     "reviewBatch": "Review Batch ({{count}} records)",
-    "scanDate": "Scan {{date}}"
+    "scanDate": "Scan {{date}}",
+    "scansRemaining": "{{count}} free scans remaining"
   },
   "scan": {
     "frameGuide": "Frame the vinyl in the guide area",
@@ -34,6 +35,10 @@
     "albumPlaceholder": "Album title",
     "submit": "Identify",
     "barcodePlaceholder": "Enter barcode number",
+    "barcodeScanInstructions": "Point camera at barcode",
+    "barcodeNotFound": "No record found for this barcode",
+    "scanBarcode": "Scan with Camera",
+    "or": "or",
     "previewAlt": "Photograph of vinyl record"
   },
   "report": {
@@ -131,7 +136,25 @@
     "version": "Version",
     "scanLimit": "Free scans remaining",
     "purchase": "Unlock Full Version",
-    "purchased": "Full Version"
+    "purchased": "Full Version",
+    "restorePurchases": "Restore Purchases"
+  },
+  "paywall": {
+    "title": "Unlock Full Version",
+    "description": "You've used all your free scans. Unlock unlimited vinyl identification.",
+    "feature1": "Unlimited vinyl scans & identification",
+    "feature2": "Full rarity reports with market values",
+    "feature3": "Collection management & export",
+    "purchaseButton": "Unlock for $4.99",
+    "restoreButton": "Restore Purchase",
+    "purchaseFailed": "Purchase failed. Please try again.",
+    "restoreFailed": "No previous purchase found."
+  },
+  "install": {
+    "title": "Install Vinyl Identifier",
+    "description": "Add to your home screen for quick access and offline use.",
+    "installButton": "Install",
+    "dismissButton": "Not now"
   },
   "common": {
     "save": "Save",
@@ -146,7 +169,16 @@
     "noResults": "No results found",
     "offline": "You're offline. Some features may be unavailable.",
     "unknownError": "Unknown error",
-    "sortBy": "Sort by"
+    "sortBy": "Sort by",
+    "skipToContent": "Skip to content",
+    "mainNavigation": "Main navigation",
+    "scanOptions": "Scan options",
+    "takePhoto": "Take photo",
+    "cameraPreview": "Camera preview",
+    "barcodePreview": "Barcode scanner preview",
+    "higher": "Higher",
+    "lower": "Lower",
+    "selectRecord": "Select a record to compare"
   },
   "export": {
     "rarity": "Rarity",

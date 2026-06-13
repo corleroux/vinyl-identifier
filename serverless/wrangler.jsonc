@@ -1,5 +1,24 @@
 {
   "name": "vinyl-identifier",
   "compatibility_date": "2026-06-08",
-  "main": "src/index.ts"
+  "main": "src/index.ts",
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true
+    }
+  },
+  "env": {
+    "staging": {
+      "name": "vinyl-identifier-staging",
+      "workers_dev": true,
+      "vars": {
+        "VISION_LLM_MODEL": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+        "RESEARCH_LLM_MODEL": "google/gemma-4-31b-it",
+        "VISION_LLM_ENDPOINT": "https://integrate.api.nvidia.com/v1/chat/completions",
+        "RESEARCH_LLM_ENDPOINT": "https://integrate.api.nvidia.com/v1/chat/completions",
+        "ALLOWED_ORIGINS": "http://localhost:5173"
+      }
+    }
+  }
 }

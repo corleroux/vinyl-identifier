@@ -56,9 +56,15 @@ async function callLLM(
   }
 
   const data = (await response.json()) as {
-    choices: Array<{ message: { content: string } }>
+    choices: Array<{ message: { content: string | null } }>
   }
-  return JSON.parse(data.choices[0].message.content) as Record<string, unknown>
+
+  const content = data.choices[0]?.message?.content
+  if (!content) {
+    throw new Error(`LLM returned empty content (model: ${model})`)
+  }
+
+  return JSON.parse(content) as Record<string, unknown>
 }
 
 export async function identifyWithVision(

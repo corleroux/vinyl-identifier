@@ -47,5 +47,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>VinylIdentifier needs camera access to scan and identify vinyl records</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>VinylIdentifier needs photo library access to upload album cover images for identification</string>
 </dict>
 </plist>

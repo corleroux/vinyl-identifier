@@ -35,6 +35,15 @@ export function ReportScreen() {
           setCondition(r.condition)
           setSelectedCurrency(r.currency)
           setNotes(r.notes ?? '')
+        } else {
+          db.scanHistory.get(id).then((scan) => {
+            if (scan?.record) {
+              setRecord(scan.record)
+              setCondition(scan.record.condition)
+              setSelectedCurrency(scan.record.currency)
+              setNotes(scan.record.notes ?? '')
+            }
+          })
         }
       })
     }

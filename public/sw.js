@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vinyl-id-v1'
+const CACHE_NAME = 'vinyl-id-v2'
 const STATIC_ASSETS = ['/', '/index.html']
 
 self.addEventListener('install', (event) => {
@@ -27,6 +27,12 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(navigationFallback(request))
   } else {
     event.respondWith(cacheFirst(request))
+  }
+})
+
+self.addEventListener('message', (event) => {
+  if (event.data === 'skipWaiting') {
+    self.skipWaiting()
   }
 })
 

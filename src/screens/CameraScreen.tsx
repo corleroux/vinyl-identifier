@@ -1,8 +1,34 @@
 import { useRef, useCallback, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera'
 import { AROverlay } from '@/components/AROverlay'
 import { useScanStore } from '@/store/useScanStore'
+import { isNativePlatform } from '@/utils/platform'
+
+async function dataUrlToBlob(dataUrl: string): Promise<Blob> {
+  const res = await fetch(dataUrl)
+  return res.blob()
+}
+
+async function captureWithCapacitor(): Promise<{ dataUrl: string; blob: Blob } | null> {
+  try {
+    const photo = await Camera.getPhoto({
+      quality: 92,
+      source: CameraSource.Camera,
+      resultType: CameraResultType.DataUrl,
+      width: 1920,
+      height: 1920,
+      correctOrientation: true,
+    })
+
+    if (!photo.dataUrl) return null
+    const blob = await dataUrlToBlob(photo.dataUrl)
+    return { dataUrl: photo.dataUrl, blob }
+  } catch {
+    return null
+  }
+}
 
 export function CameraScreen() {
   const { t } = useTranslation()
@@ -14,33 +40,56 @@ export function CameraScreen() {
   const setStage = useScanStore((s) => s.setStage)
   const capturedRef = useRef(false)
 
-  const startCamera = useCallback(async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
+  const isNative = isNativePlatform()
+
+  useEffect(() => {
+    if (isNative) return
+
+    let cancelled = false
+    navigator.mediaDevices
+      .getUserMedia({
         video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1920 } },
         audio: false,
       })
-      streamRef.current = stream
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream
-      }
-    } catch {
-      navigate(-1)
-    }
-  }, [navigate])
+      .then((stream) => {
+        if (cancelled) {
+          stream.getTracks().forEach((t) => t.stop())
+          return
+        }
+        streamRef.current = stream
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream
+        }
+      })
+      .catch(() => {
+        if (!cancelled) navigate(-1)
+      })
 
-  useEffect(() => {
-    startCamera()
     return () => {
+      cancelled = true
       streamRef.current?.getTracks().forEach((t) => t.stop())
     }
-  }, [startCamera])
+  }, [navigate, isNative])
 
-  const capture = useCallback(() => {
+  const capture = useCallback(async () => {
+    if (capturedRef.current) return
+    capturedRef.current = true
+
+    if (isNative) {
+      const result = await captureWithCapacitor()
+      if (result) {
+        setImage(result.dataUrl, result.blob)
+        setStage('preview')
+        navigate('/scan/preview')
+      } else {
+        capturedRef.current = false
+      }
+      return
+    }
+
     const video = videoRef.current
     const canvas = canvasRef.current
-    if (!video || !canvas || capturedRef.current) return
-    capturedRef.current = true
+    if (!video || !canvas) return
 
     canvas.width = video.videoWidth
     canvas.height = video.videoHeight
@@ -65,7 +114,34 @@ export function CameraScreen() {
       'image/jpeg',
       0.92,
     )
-  }, [navigate, setImage, setStage])
+  }, [navigate, setImage, setStage, isNative])
+
+  if (isNative) {
+    return (
+      <div className="relative flex flex-col min-h-screen bg-black">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <AROverlay />
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-center gap-6">
+          <button
+            onClick={() => navigate(-1)}
+            className="w-16 h-16 rounded-full bg-white/20 backdrop-blur flex items-center justify-center"
+          >
+            <span className="text-white text-sm font-medium">{t('common.cancel')}</span>
+          </button>
+          <button
+            onClick={capture}
+            aria-label={t('common.takePhoto')}
+            className="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center"
+          >
+            <div className="w-16 h-16 rounded-full bg-white" />
+          </button>
+          <div className="w-16" />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="relative flex flex-col min-h-screen bg-black">
@@ -73,7 +149,7 @@ export function CameraScreen() {
         ref={videoRef}
         autoPlay
         playsInline
-        aria-label="Camera preview"
+        aria-label={t('common.cameraPreview')}
         className="absolute inset-0 w-full h-full object-cover"
       />
       <canvas ref={canvasRef} className="hidden" />
@@ -91,7 +167,7 @@ export function CameraScreen() {
         </button>
         <button
           onClick={capture}
-          aria-label="Take photo"
+          aria-label={t('common.takePhoto')}
           className="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center"
         >
           <div className="w-16 h-16 rounded-full bg-white" />

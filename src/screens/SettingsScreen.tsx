@@ -1,5 +1,9 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { useAppStore } from '@/store/useAppStore'
+import { restorePurchases } from '@/services/purchase'
+import { track } from '@/services/analytics'
 import type { Currency } from '@/types'
 
 const LANGUAGES = [
@@ -14,11 +18,27 @@ const CURRENCIES: Currency[] = ['USD', 'EUR', 'GBP']
 
 export function SettingsScreen() {
   const { t, i18n } = useTranslation()
+  const navigate = useNavigate()
   const currency = useAppStore((s) => s.currency)
   const setCurrency = useAppStore((s) => s.setCurrency)
   const isFullVersion = useAppStore((s) => s.isFullVersion)
+  const setFullVersion = useAppStore((s) => s.setFullVersion)
   const scanCount = useAppStore((s) => s.scanCount)
   const maxFreeScans = useAppStore((s) => s.maxFreeScans)
+  const [restoring, setRestoring] = useState(false)
+
+  async function handleRestore() {
+    setRestoring(true)
+    try {
+      const result = await restorePurchases()
+      if (result.success) {
+        setFullVersion(true)
+        track('purchase_restored')
+      }
+    } finally {
+      setRestoring(false)
+    }
+  }
 
   return (
     <div className="flex flex-col min-h-screen p-6">
@@ -63,11 +83,28 @@ export function SettingsScreen() {
 
         <div className="border-t pt-4">
           <p className="text-sm text-gray-500">{t('settings.scanLimit')}</p>
-          <p className="font-semibold">
+          <p className="font-semibold mb-3">
             {isFullVersion
               ? t('settings.purchased')
               : `${Math.max(0, maxFreeScans - scanCount)} / ${maxFreeScans}`}
           </p>
+          {!isFullVersion && (
+            <button
+              onClick={() => navigate('/paywall')}
+              className="btn-primary w-full min-h-[44px]"
+            >
+              {t('settings.purchase')}
+            </button>
+          )}
+          {isFullVersion && (
+            <button
+              onClick={handleRestore}
+              disabled={restoring}
+              className="btn-secondary w-full min-h-[44px]"
+            >
+              {restoring ? t('common.loading') : t('settings.restorePurchases')}
+            </button>
+          )}
         </div>
 
         <div className="border-t pt-4">

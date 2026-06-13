@@ -1,7 +1,9 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { OfflineBanner } from '@/components/OfflineBanner'
 import { BottomNav } from '@/components/BottomNav'
+import { InstallPrompt } from '@/components/InstallPrompt'
 
 const HomeScreen = lazy(() =>
   import('@/screens/HomeScreen').then((m) => ({ default: m.HomeScreen })),
@@ -42,15 +44,19 @@ const CompareScreen = lazy(() =>
 const SettingsScreen = lazy(() =>
   import('@/screens/SettingsScreen').then((m) => ({ default: m.SettingsScreen })),
 )
+const PaywallScreen = lazy(() =>
+  import('@/screens/PaywallScreen').then((m) => ({ default: m.PaywallScreen })),
+)
 
 const HIDE_NAV_ROUTES = ['/scan/camera', '/scan/processing', '/scan/gallery']
 
 function LoadingFallback() {
+  const { t } = useTranslation()
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div
         className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"
-        aria-label="Loading"
+        aria-label={t('common.loading')}
         role="status"
       />
     </div>
@@ -59,6 +65,7 @@ function LoadingFallback() {
 
 export default function App() {
   const location = useLocation()
+  const { t } = useTranslation()
   const showNav = !HIDE_NAV_ROUTES.includes(location.pathname)
 
   return (
@@ -67,7 +74,7 @@ export default function App() {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded"
       >
-        Skip to content
+        {t('common.skipToContent')}
       </a>
       <OfflineBanner />
       <main id="main-content" className={showNav ? 'pb-16' : ''}>
@@ -86,10 +93,12 @@ export default function App() {
             <Route path="/library/history" element={<ScanHistoryScreen />} />
             <Route path="/compare" element={<CompareScreen />} />
             <Route path="/settings" element={<SettingsScreen />} />
+            <Route path="/paywall" element={<PaywallScreen />} />
           </Routes>
         </Suspense>
       </main>
       {showNav && <BottomNav />}
+      <InstallPrompt />
     </>
   )
 }

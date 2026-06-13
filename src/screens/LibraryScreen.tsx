@@ -26,6 +26,7 @@ function SwipeableListItem({
   onDelete,
   onAssignFolder,
   onToggleTag,
+  onUpdateNotes,
   t,
 }: {
   record: VinylRecord
@@ -35,10 +36,13 @@ function SwipeableListItem({
   onDelete: (id: string) => void
   onAssignFolder: (recordId: string, folderId: string) => void
   onToggleTag: (recordId: string, tagId: string) => void
+  onUpdateNotes: (recordId: string, notes: string) => void
   t: (key: string) => string
 }) {
   const startX = useRef(0)
   const elementRef = useRef<HTMLDivElement>(null)
+  const [showNotes, setShowNotes] = useState(false)
+  const [notesDraft, setNotesDraft] = useState(record.notes ?? '')
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     startX.current = e.touches[0].clientX
@@ -110,9 +114,40 @@ function SwipeableListItem({
                   })}
                 </div>
               )}
+              {record.notes && !showNotes && (
+                <span className="text-xs text-gray-500 truncate max-w-[120px]" title={record.notes}>
+                  📝 {record.notes}
+                </span>
+              )}
             </div>
+            {showNotes && (
+              <div className="mt-2">
+                <label htmlFor={`notes-${record.id}`} className="sr-only">
+                  {t('report.notes')}
+                </label>
+                <textarea
+                  id={`notes-${record.id}`}
+                  value={notesDraft}
+                  onChange={(e) => setNotesDraft(e.target.value)}
+                  onBlur={() => onUpdateNotes(record.id, notesDraft)}
+                  rows={2}
+                  className="w-full text-xs border rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
+                  placeholder={t('report.notesPlaceholder')}
+                />
+              </div>
+            )}
           </button>
           <div className="flex gap-1 flex-shrink-0 ml-2">
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setShowNotes(!showNotes)
+              }}
+              className={`text-xs border rounded px-1 py-0.5 ${showNotes ? 'bg-blue-100 text-blue-700' : ''}`}
+              title={t('report.notes')}
+            >
+              📝
+            </button>
             <select
               value={record.folderId ?? ''}
               onChange={(e) => onAssignFolder(record.id, e.target.value)}
@@ -441,6 +476,11 @@ export function LibraryScreen() {
     setRecords((prev) => prev.map((r) => (r.id === recordId ? { ...r, tags: newTags } : r)))
   }
 
+  async function handleUpdateNotes(recordId: string, notes: string) {
+    await db.records.update(recordId, { notes, updatedAt: Date.now() })
+    setRecords((prev) => prev.map((r) => (r.id === recordId ? { ...r, notes } : r)))
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -725,6 +765,7 @@ export function LibraryScreen() {
                 }}
                 onAssignFolder={handleAssignFolder}
                 onToggleTag={handleToggleRecordTag}
+                onUpdateNotes={handleUpdateNotes}
                 t={t}
               />
             ))}

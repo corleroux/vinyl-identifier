@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useScanStore } from '@/store/useScanStore'
+import { useAppStore } from '@/store/useAppStore'
 import { db } from '@/db'
+import { track } from '@/services/analytics'
 import type { ScanResult } from '@/types'
 
 export function HomeScreen() {
@@ -11,11 +13,31 @@ export function HomeScreen() {
   const batchMode = useScanStore((s) => s.batchMode)
   const toggleBatchMode = useScanStore((s) => s.toggleBatchMode)
   const batchQueue = useScanStore((s) => s.batchQueue)
+  const isFullVersion = useAppStore((s) => s.isFullVersion)
+  const scanCount = useAppStore((s) => s.scanCount)
+  const maxFreeScans = useAppStore((s) => s.maxFreeScans)
+  const incrementScanCount = useAppStore((s) => s.incrementScanCount)
   const [recentScans, setRecentScans] = useState<ScanResult[]>([])
+
+  const scansRemaining = Math.max(0, maxFreeScans - scanCount)
+  const canScan = isFullVersion || scansRemaining > 0
 
   useEffect(() => {
     db.scanHistory.orderBy('createdAt').reverse().limit(5).toArray().then(setRecentScans)
   }, [])
+
+  function handleScan(path: string) {
+    if (!canScan) {
+      navigate('/paywall')
+      return
+    }
+    incrementScanCount()
+    track('scan_started', {
+      method: path.replace('/scan/', ''),
+      scans_remaining: scansRemaining - 1,
+    })
+    navigate(path)
+  }
 
   return (
     <div className="flex flex-col min-h-screen p-6">
@@ -23,17 +45,38 @@ export function HomeScreen() {
         <h1 className="text-3xl font-bold">{t('home.title')}</h1>
         <p className="text-lg text-center text-gray-600">{t('home.subtitle')}</p>
 
-        <nav aria-label="Scan options" className="flex flex-col gap-4 w-full max-w-sm">
-          <button onClick={() => navigate('/scan/camera')} className="btn-primary min-h-[48px]">
+        {!isFullVersion && (
+          <p className="text-sm text-center text-gray-500">
+            {t('home.scansRemaining', { count: scansRemaining })}
+          </p>
+        )}
+
+        <nav aria-label={t('common.scanOptions')} className="flex flex-col gap-4 w-full max-w-sm">
+          <button onClick={() => handleScan('/scan/camera')} className="btn-primary min-h-[48px]">
             {t('home.camera')}
           </button>
-          <button onClick={() => navigate('/scan/gallery')} className="btn-secondary min-h-[48px]">
+          <button
+            onClick={() => handleScan('/scan/gallery')}
+            className="btn-secondary min-h-[48px]"
+          >
             {t('home.gallery')}
           </button>
-          <button onClick={() => navigate('/scan/barcode')} className="btn-secondary min-h-[48px]">
+          <button
+            onClick={() => handleScan('/scan/barcode')}
+            className="btn-secondary min-h-[48px]"
+          >
             {t('home.barcode')}
           </button>
         </nav>
+
+        {!isFullVersion && (
+          <button
+            onClick={() => navigate('/paywall')}
+            className="text-sm text-blue-600 hover:text-blue-800 underline min-h-[44px] flex items-center"
+          >
+            {t('settings.purchase')}
+          </button>
+        )}
 
         <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer min-h-[44px]">
           <input

@@ -2,10 +2,11 @@
   "name": "Vinyl Identifier",
   "short_name": "VinylID",
   "description": "Identify vinyl records and discover their rarity and value",
+  "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#1f2937",
   "theme_color": "#2563eb",
   "orientation": "portrait",
   "categories": ["music", "utilities"],
@@ -26,5 +27,7 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
 }
