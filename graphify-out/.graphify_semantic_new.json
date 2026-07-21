@@ -1,353 +1,378 @@
 {
   "nodes": [
     {
-      "id": "prd_local_first_pattern",
-      "label": "Local-First Pattern",
+      "id": "prd_vinyl_identifier",
+      "label": "Vinyl Identifier",
+      "file_type": "document",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_multi_model_llm_pipeline",
+      "label": "Multi-Model LLM Pipeline",
       "file_type": "rationale",
       "source_file": "/home/cor/Development/vinyl/PRD.md",
       "source_location": null,
       "source_url": null,
-      "author": null,
-      "contributor": null,
       "captured_at": null,
-      "rationale": "All data stored locally via IndexedDB/Dexie; no user accounts means no PII; collection up to 10,000 records offline."
+      "author": null,
+      "contributor": null
     },
     {
-      "id": "prd_offline_first",
-      "label": "Offline-First Design",
+      "id": "prd_local_first_architecture",
+      "label": "Local-First Architecture",
       "file_type": "rationale",
       "source_file": "/home/cor/Development/vinyl/PRD.md",
       "source_location": null,
       "source_url": null,
-      "author": null,
-      "contributor": null,
       "captured_at": null,
-      "rationale": "Graceful degradation when offline: cached reports, queued scans for later processing, service worker caching."
+      "author": null,
+      "contributor": null
     },
     {
-      "id": "prd_multi_model_llm",
-      "label": "Multi-Model LLM Architecture",
-      "file_type": "rationale",
+      "id": "prd_rarity_report",
+      "label": "Rarity Report",
+      "file_type": "concept",
       "source_file": "/home/cor/Development/vinyl/PRD.md",
       "source_location": null,
       "source_url": null,
-      "author": null,
-      "contributor": null,
       "captured_at": null,
-      "rationale": "Vision LLM (GPT-4o/Gemini) identifies record from image; Research LLM (Claude/GPT-4) provides deep rarity/value analysis; structured JSON output with cross-reference to Discogs to mitigate hallucination risk."
+      "author": null,
+      "contributor": null
     },
     {
-      "id": "prd_5_scan_free_trial",
+      "id": "prd_collection_library",
+      "label": "Collection Library",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_compare_mode",
+      "label": "Compare Mode",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_five_scan_free_trial",
       "label": "5-Scan Free Trial",
-      "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "prd_rarity_tier_system",
-      "label": "Rarity Tier System",
-      "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "prd_discogs_api",
-      "label": "Discogs API",
-      "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "prd_phased_development",
-      "label": "Phased Development Approach",
       "file_type": "rationale",
       "source_file": "/home/cor/Development/vinyl/PRD.md",
       "source_location": null,
       "source_url": null,
-      "author": null,
-      "contributor": null,
       "captured_at": null,
-      "rationale": "Platform distribution evolves incrementally: MVP as PWA (web), v1.0 wraps with Capacitor for iOS/Android, future native features via Capacitor plugins."
+      "author": null,
+      "contributor": null
     },
     {
-      "id": "roadmap_5_phase_plan",
-      "label": "5-Phase Development Plan",
+      "id": "prd_one_time_purchase",
+      "label": "One-Time Purchase Monetization",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_discogs_integration",
+      "label": "Discogs API Integration",
       "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/ROADMAP.md",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
       "source_location": null,
       "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "docs_mobile_deployment_pipeline_dual_pathway",
-      "label": "Mobile Deployment Dual Pathway",
-      "file_type": "rationale",
-      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
       "captured_at": null,
-      "rationale": "Two build pathways coexist: CI/GitHub Actions (tag-triggered, unsigned debug artifacts) and EAS Build (manual, signed store-grade). They are not wired together — EAS is configured but never invoked by CI."
+      "author": null,
+      "contributor": null
     },
     {
-      "id": "agents_typescript_quirks",
-      "label": "TypeScript 6.0 Quirks",
-      "file_type": "rationale",
-      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "id": "prd_ar_framing_overlay",
+      "label": "AR-Style Framing Overlay",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
       "source_location": null,
       "source_url": null,
-      "author": null,
-      "contributor": null,
       "captured_at": null,
-      "rationale": "vite.config.ts is not type-checked (lives outside tsconfig project references); ignoreDeprecations 6.0 for baseUrl+paths; verbatimModuleSyntax requires import type for type-only imports; noUnusedLocals+noUnusedParameters enforced."
+      "author": null,
+      "contributor": null
     },
     {
-      "id": "agents_vitest_setup",
-      "label": "Vitest Configuration",
-      "file_type": "rationale",
-      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "id": "prd_condition_assessment",
+      "label": "Condition Assessment",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
       "source_location": null,
       "source_url": null,
-      "author": null,
-      "contributor": null,
       "captured_at": null,
-      "rationale": "Config in package.json under vitest key (not separate file); jsdom environment; globals enabled; setup file at src/test/setup.ts."
+      "author": null,
+      "contributor": null
     },
     {
-      "id": "agents_tailwind_v4_setup",
-      "label": "Tailwind CSS v4 Setup",
+      "id": "prd_wcag_2_1_aa",
+      "label": "WCAG 2.1 AA Accessibility",
       "file_type": "rationale",
-      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
       "source_location": null,
       "source_url": null,
-      "author": null,
-      "contributor": null,
       "captured_at": null,
-      "rationale": "No config file; imported via @import tailwindcss in src/index.css; configured as Vite plugin (@tailwindcss/vite); no tailwind.config.* to edit."
+      "author": null,
+      "contributor": null
     },
     {
-      "id": "agents_i18n_system",
-      "label": "i18n Namespace System",
+      "id": "prd_scan_to_report_15s",
+      "label": "Scan-to-Report <15s Target",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_bundle_size_200kb",
+      "label": "Bundle Size <200KB Budget",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_react_19",
+      "label": "React 19",
       "file_type": "concept",
       "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
-      "id": "prd_zustand_store",
-      "label": "Zustand Client State",
+      "id": "agents_typescript_6",
+      "label": "TypeScript 6",
       "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
-      "id": "prd_tanstack_query",
+      "id": "agents_vite",
+      "label": "Vite",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_zustand",
+      "label": "Zustand",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_tanstack_query",
       "label": "TanStack Query",
       "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "prd_dexie_indexeddb",
-      "label": "Dexie IndexedDB",
-      "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "prd_i18next",
-      "label": "i18next",
-      "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "prd_tailwind_css",
-      "label": "Tailwind CSS",
-      "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "prd_capacitor",
-      "label": "Capacitor v8",
-      "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "agents_architecture",
-      "label": "App Architecture Layers",
-      "file_type": "document",
       "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
-      "id": "index_html",
-      "label": "index.html",
-      "file_type": "document",
-      "source_file": "/home/cor/Development/vinyl/index.html",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "prd_llm_pipeline",
-      "label": "LLM Processing Pipeline",
+      "id": "agents_dexie_indexeddb",
+      "label": "Dexie (IndexedDB)",
       "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
-      "id": "prd_vision_llm",
-      "label": "Vision LLM",
+      "id": "agents_i18next",
+      "label": "i18next",
       "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
-      "id": "prd_research_llm",
-      "label": "Research LLM",
+      "id": "agents_tailwind_v4",
+      "label": "Tailwind CSS v4",
       "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
-      "id": "github_actions_ci",
-      "label": "GitHub Actions CI",
+      "id": "agents_capacitor_v8",
+      "label": "Capacitor v8",
       "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
-      "id": "prd_vite_build",
-      "label": "Vite Build",
+      "id": "agents_cloudflare_workers",
+      "label": "Cloudflare Workers / Edge",
       "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
-      "id": "prd_web_dist",
-      "label": "Web Dist Output",
+      "id": "agents_vinyl_record_type",
+      "label": "VinylRecord Type",
       "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
-      "id": "docs_cap_sync",
-      "label": "Capacitor Sync",
+      "id": "agents_rarity_tier_type",
+      "label": "RarityTier Type",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_vinyl_condition_type",
+      "label": "VinylCondition Type",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_scan_result_type",
+      "label": "ScanResult Type",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_screen_route_system",
+      "label": "Screen/Route System",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_phase_based_development",
+      "label": "Phase-Based Development",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "contributing_i18n_namespace_system",
+      "label": "i18n Namespace System",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/CONTRIBUTING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "contributing_translation_workflow",
+      "label": "Translation Contribution Workflow",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/CONTRIBUTING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_vite_react_template",
+      "label": "Vite React Template",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_mobile_deployment_pipeline",
+      "label": "Mobile Deployment Pipeline",
       "file_type": "concept",
       "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "docs_native_android_build",
-      "label": "Android Native Build",
-      "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "docs_native_ios_build",
-      "label": "iOS Native Build",
-      "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "ci_yml_triggers_on_v_tag",
-      "label": "CI Workflow",
-      "file_type": "document",
-      "source_file": "/home/cor/Development/vinyl/.github/workflows/ci.yml",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
       "id": "docs_eas_build",
@@ -356,60 +381,137 @@
       "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
-      "id": "ci_android_job",
-      "label": "CI Android Job",
-      "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/.github/workflows/ci.yml",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "ci_ios_job",
-      "label": "CI iOS Job",
-      "file_type": "concept",
-      "source_file": "/home/cor/Development/vinyl/.github/workflows/ci.yml",
-      "source_location": null,
-      "source_url": null,
-      "author": null,
-      "contributor": null,
-      "captured_at": null
-    },
-    {
-      "id": "docs_gradle_build",
-      "label": "Gradle Build",
+      "id": "docs_cap_sync",
+      "label": "Capacitor Sync (cap sync)",
       "file_type": "concept",
       "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
     },
     {
-      "id": "docs_xcode_build",
-      "label": "Xcode Build",
+      "id": "docs_tag_triggered_ci",
+      "label": "Tag-Triggered CI",
       "file_type": "concept",
       "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
       "source_location": null,
       "source_url": null,
+      "captured_at": null,
       "author": null,
-      "contributor": null,
-      "captured_at": null
+      "contributor": null
+    },
+    {
+      "id": "docs_unsigned_ci_builds",
+      "label": "Unsigned CI Builds Gap",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_ci_eas_disconnected",
+      "label": "CI and EAS Disconnected",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_version_sync_gap",
+      "label": "Version Sync Gap",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_android_permissions_stale",
+      "label": "Android Permissions Stale",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_eas_profiles",
+      "label": "EAS Build Profiles",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_capacitor_config",
+      "label": "Capacitor Configuration",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "stats_rollup_visualizer",
+      "label": "Rollup Visualizer",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/stats.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_favicon_svg",
+      "label": "Vinyl Identifier Favicon",
+      "file_type": "image",
+      "source_file": "/home/cor/Development/vinyl/public/favicon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_icons_svg",
+      "label": "Social Icons Sprite Sheet",
+      "file_type": "image",
+      "source_file": "/home/cor/Development/vinyl/public/icons.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
     }
   ],
   "edges": [
     {
-      "source": "prd_multi_model_llm",
-      "target": "prd_llm_pipeline",
-      "relation": "part_of",
+      "source": "prd_vinyl_identifier",
+      "target": "prd_multi_model_llm_pipeline",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "/home/cor/Development/vinyl/PRD.md",
@@ -417,9 +519,9 @@
       "weight": 1.0
     },
     {
-      "source": "prd_multi_model_llm",
-      "target": "prd_vision_llm",
-      "relation": "uses",
+      "source": "prd_vinyl_identifier",
+      "target": "prd_local_first_architecture",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "/home/cor/Development/vinyl/PRD.md",
@@ -427,9 +529,9 @@
       "weight": 1.0
     },
     {
-      "source": "prd_multi_model_llm",
-      "target": "prd_research_llm",
-      "relation": "uses",
+      "source": "prd_vinyl_identifier",
+      "target": "prd_rarity_report",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "/home/cor/Development/vinyl/PRD.md",
@@ -437,9 +539,9 @@
       "weight": 1.0
     },
     {
-      "source": "prd_llm_pipeline",
-      "target": "prd_discogs_api",
-      "relation": "feeds_into",
+      "source": "prd_vinyl_identifier",
+      "target": "prd_collection_library",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "/home/cor/Development/vinyl/PRD.md",
@@ -447,9 +549,9 @@
       "weight": 1.0
     },
     {
-      "source": "prd_local_first_pattern",
-      "target": "prd_dexie_indexeddb",
-      "relation": "implemented_via",
+      "source": "prd_vinyl_identifier",
+      "target": "prd_compare_mode",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "/home/cor/Development/vinyl/PRD.md",
@@ -457,58 +559,238 @@
       "weight": 1.0
     },
     {
-      "source": "prd_offline_first",
-      "target": "prd_local_first_pattern",
-      "relation": "builds_on",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
+      "source": "prd_vinyl_identifier",
+      "target": "prd_five_scan_free_trial",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "/home/cor/Development/vinyl/PRD.md",
       "source_location": null,
       "weight": 1.0
     },
     {
-      "source": "prd_offline_first",
-      "target": "prd_dexie_indexeddb",
-      "relation": "relies_on",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
+      "source": "prd_vinyl_identifier",
+      "target": "prd_one_time_purchase",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "/home/cor/Development/vinyl/PRD.md",
       "source_location": null,
       "weight": 1.0
     },
     {
-      "source": "prd_zustand_store",
-      "target": "prd_5_scan_free_trial",
-      "relation": "enforces",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
+      "source": "prd_vinyl_identifier",
+      "target": "prd_discogs_integration",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_multi_model_llm_pipeline",
+      "target": "prd_discogs_integration",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_multi_model_llm_pipeline",
+      "target": "prd_rarity_report",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_local_first_architecture",
+      "target": "prd_collection_library",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_five_scan_free_trial",
+      "target": "prd_one_time_purchase",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_ar_framing_overlay",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_condition_assessment",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_wcag_2_1_aa",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_scan_to_report_15s",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_bundle_size_200kb",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_react_19",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "weight": 1.0
     },
     {
-      "source": "prd_phased_development",
-      "target": "prd_capacitor",
-      "relation": "uses",
+      "source": "agents_typescript_6",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "weight": 1.0
     },
     {
-      "source": "prd_phased_development",
-      "target": "roadmap_5_phase_plan",
-      "relation": "referenced_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "/home/cor/Development/vinyl/ROADMAP.md",
+      "source": "agents_vite",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "weight": 1.0
     },
     {
-      "source": "agents_architecture",
-      "target": "prd_zustand_store",
+      "source": "agents_zustand",
+      "target": "prd_local_first_architecture",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_tanstack_query",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_dexie_indexeddb",
+      "target": "prd_local_first_architecture",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_i18next",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_tailwind_v4",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_capacitor_v8",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_cloudflare_workers",
+      "target": "prd_multi_model_llm_pipeline",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_cloudflare_workers",
+      "target": "prd_discogs_integration",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_vinyl_record_type",
+      "target": "prd_rarity_report",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -517,8 +799,8 @@
       "weight": 1.0
     },
     {
-      "source": "agents_architecture",
-      "target": "prd_tanstack_query",
+      "source": "agents_rarity_tier_type",
+      "target": "prd_rarity_report",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -527,8 +809,8 @@
       "weight": 1.0
     },
     {
-      "source": "agents_architecture",
-      "target": "prd_dexie_indexeddb",
+      "source": "agents_vinyl_condition_type",
+      "target": "prd_condition_assessment",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -537,8 +819,8 @@
       "weight": 1.0
     },
     {
-      "source": "agents_architecture",
-      "target": "prd_i18next",
+      "source": "agents_scan_result_type",
+      "target": "prd_multi_model_llm_pipeline",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -547,8 +829,8 @@
       "weight": 1.0
     },
     {
-      "source": "agents_architecture",
-      "target": "prd_tailwind_css",
+      "source": "agents_screen_route_system",
+      "target": "prd_vinyl_identifier",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -557,8 +839,18 @@
       "weight": 1.0
     },
     {
-      "source": "agents_architecture",
-      "target": "prd_capacitor",
+      "source": "agents_phase_based_development",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_i18next",
+      "target": "contributing_i18n_namespace_system",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -567,49 +859,39 @@
       "weight": 1.0
     },
     {
-      "source": "index_html",
-      "target": "agents_architecture",
+      "source": "contributing_translation_workflow",
+      "target": "contributing_i18n_namespace_system",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/index.html",
+      "source_file": "/home/cor/Development/vinyl/CONTRIBUTING.md",
       "source_location": null,
       "weight": 1.0
     },
     {
-      "source": "agents_architecture",
-      "target": "prd_i18next",
-      "relation": "uses",
+      "source": "readme_vite_react_template",
+      "target": "agents_vite",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_file": "/home/cor/Development/vinyl/README.md",
       "source_location": null,
       "weight": 1.0
     },
     {
-      "source": "agents_i18n_system",
-      "target": "prd_i18next",
-      "relation": "uses",
+      "source": "readme_vite_react_template",
+      "target": "agents_react_19",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_file": "/home/cor/Development/vinyl/README.md",
       "source_location": null,
       "weight": 1.0
     },
     {
-      "source": "prd_vite_build",
-      "target": "prd_web_dist",
-      "relation": "produces",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/PRD.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "prd_web_dist",
-      "target": "docs_cap_sync",
-      "relation": "feeds_into",
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "agents_capacitor_v8",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
@@ -617,67 +899,7 @@
       "weight": 1.0
     },
     {
-      "source": "docs_cap_sync",
-      "target": "docs_native_android_build",
-      "relation": "feeds_into",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "docs_cap_sync",
-      "target": "docs_native_ios_build",
-      "relation": "feeds_into",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "ci_yml_triggers_on_v_tag",
-      "target": "github_actions_ci",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/.github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "ci_yml_triggers_on_v_tag",
-      "target": "prd_vite_build",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/.github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "ci_yml_triggers_on_v_tag",
-      "target": "docs_cap_sync",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/.github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "ci_yml_triggers_on_v_tag",
-      "target": "docs_mobile_deployment_pipeline_dual_pathway",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "docs_mobile_deployment_pipeline_dual_pathway",
+      "source": "docs_mobile_deployment_pipeline",
       "target": "docs_eas_build",
       "relation": "references",
       "confidence": "EXTRACTED",
@@ -687,38 +909,8 @@
       "weight": 1.0
     },
     {
-      "source": "docs_mobile_deployment_pipeline_dual_pathway",
-      "target": "docs_eas_build",
-      "relation": "alternative_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "ci_android_job",
-      "target": "docs_gradle_build",
-      "relation": "uses",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/.github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "ci_ios_job",
-      "target": "docs_xcode_build",
-      "relation": "uses",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/.github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "docs_mobile_deployment_pipeline_dual_pathway",
-      "target": "ci_yml_triggers_on_v_tag",
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_cap_sync",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -727,18 +919,118 @@
       "weight": 1.0
     },
     {
-      "source": "agents_architecture",
-      "target": "agents_typescript_quirks",
-      "relation": "constrained_by",
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_tag_triggered_ci",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
       "source_location": null,
       "weight": 1.0
     },
     {
-      "source": "agents_architecture",
-      "target": "agents_vitest_setup",
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_unsigned_ci_builds",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_ci_eas_disconnected",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_version_sync_gap",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_android_permissions_stale",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_eas_build",
+      "target": "docs_eas_profiles",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_cap_sync",
+      "target": "docs_capacitor_config",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_tag_triggered_ci",
+      "target": "agents_vite",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "stats_rollup_visualizer",
+      "target": "prd_bundle_size_200kb",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "/home/cor/Development/vinyl/stats.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "public_favicon_svg",
+      "target": "prd_vinyl_identifier",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/public/favicon.svg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "public_icons_svg",
+      "target": "prd_vinyl_identifier",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "/home/cor/Development/vinyl/public/icons.svg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_zustand",
+      "target": "prd_five_scan_free_trial",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -747,8 +1039,8 @@
       "weight": 1.0
     },
     {
-      "source": "agents_architecture",
-      "target": "agents_tailwind_v4_setup",
+      "source": "agents_dexie_indexeddb",
+      "target": "prd_collection_library",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -757,9 +1049,39 @@
       "weight": 1.0
     },
     {
-      "source": "prd_rarity_tier_system",
-      "target": "prd_llm_pipeline",
-      "relation": "produced_by",
+      "source": "agents_screen_route_system",
+      "target": "prd_collection_library",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_screen_route_system",
+      "target": "prd_compare_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_ci_eas_disconnected",
+      "target": "docs_version_sync_gap",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_multi_model_llm_pipeline",
+      "target": "prd_scan_to_report_15s",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "/home/cor/Development/vinyl/PRD.md",
@@ -767,21 +1089,11 @@
       "weight": 1.0
     },
     {
-      "source": "roadmap_5_phase_plan",
-      "target": "prd_phased_development",
-      "relation": "implements",
+      "source": "agents_tanstack_query",
+      "target": "agents_cloudflare_workers",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/ROADMAP.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "agents_architecture",
-      "target": "prd_local_first_pattern",
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
       "source_file": "/home/cor/Development/vinyl/AGENTS.md",
       "source_location": null,
       "weight": 1.0
@@ -789,35 +1101,54 @@
   ],
   "hyperedges": [
     {
-      "id": "client_architecture_stack",
-      "label": "Client Architecture Stack",
+      "id": "technology_stack_layer",
+      "label": "Vinyl Identifier Technology Stack",
       "nodes": [
-        "index_html",
-        "agents_architecture",
-        "prd_zustand_store",
-        "prd_tanstack_query",
-        "prd_dexie_indexeddb"
-      ],
-      "relation": "form",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "/home/cor/Development/vinyl/AGENTS.md"
-    },
-    {
-      "id": "native_build_pipeline_flow",
-      "label": "Native Build Pipeline Flow",
-      "nodes": [
-        "prd_vite_build",
-        "prd_web_dist",
-        "docs_cap_sync",
-        "ci_android_job",
-        "ci_ios_job",
-        "ci_yml_triggers_on_v_tag"
+        "agents_react_19",
+        "agents_typescript_6",
+        "agents_vite",
+        "agents_zustand",
+        "agents_tanstack_query",
+        "agents_dexie_indexeddb",
+        "agents_i18next",
+        "agents_tailwind_v4",
+        "agents_capacitor_v8",
+        "agents_cloudflare_workers"
       ],
       "relation": "participate_in",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "/home/cor/Development/vinyl/.github/workflows/ci.yml"
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md"
+    },
+    {
+      "id": "deployment_build_pathways",
+      "label": "Mobile Build and Deployment Pathways",
+      "nodes": [
+        "docs_eas_build",
+        "docs_cap_sync",
+        "docs_tag_triggered_ci",
+        "docs_eas_profiles",
+        "docs_capacitor_config",
+        "agents_vite"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md"
+    },
+    {
+      "id": "domain_model_types",
+      "label": "Vinyl Domain Model Types",
+      "nodes": [
+        "agents_vinyl_record_type",
+        "agents_rarity_tier_type",
+        "agents_vinyl_condition_type",
+        "agents_scan_result_type"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md"
     }
   ],
   "input_tokens": 0,

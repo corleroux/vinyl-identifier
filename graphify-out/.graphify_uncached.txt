@@ -1,11 +1,8 @@
-/home/cor/Development/vinyl/.github/workflows/ci.yml
 /home/cor/Development/vinyl/AGENTS.md
 /home/cor/Development/vinyl/CONTRIBUTING.md
 /home/cor/Development/vinyl/PRD.md
 /home/cor/Development/vinyl/README.md
-/home/cor/Development/vinyl/ROADMAP.md
 /home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md
-/home/cor/Development/vinyl/index.html
 /home/cor/Development/vinyl/stats.html
 /home/cor/Development/vinyl/public/favicon.svg
 /home/cor/Development/vinyl/public/icons.svg

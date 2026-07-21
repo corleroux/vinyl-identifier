@@ -1,5 +1,47 @@
 # Vinyl Identifier — Agent Guide
 
+## Knowledge Graph (source of truth)
+
+**The knowledge graph is the primary source of truth for understanding this codebase.** Always query the graph before reading raw source files.
+
+### Graph-first query workflow
+
+1. **Check the graph first.** Run `graphify query "<question>"` to answer questions about architecture, data flow, dependencies, or code structure.
+2. **Use `graphify path "A" "B"`** to find the shortest path between two concepts.
+3. **Use `graphify explain "NodeName"`** to understand a specific node and its connections.
+4. **Fall back to source files only if the graph cannot answer the question.** The graph is rebuilt automatically on every commit, so it should be current.
+
+### Graph outputs
+
+- `graphify-out/graph.html` — interactive visualization (open in browser)
+- `graphify-out/GRAPH_REPORT.md` — audit report with god nodes, surprising connections, community structure
+- `graphify-out/graph.json` — raw graph data (queryable via `graphify query`)
+
+### Graph freshness
+
+The graph is auto-updated via `.husky/post-commit` after every commit. To verify freshness:
+
+```bash
+npm run graph:check   # exits 0 if current, 1 if stale
+```
+
+If stale, rebuild:
+
+```bash
+npm run graph:update  # code-only update (no LLM)
+/graphify             # full rebuild including docs (agent session)
+```
+
+The graph is a development tool, not a production dependency. A stale graph does not block releases.
+
+### When the graph is wrong
+
+If a graph query returns incorrect or missing information:
+
+1. Check if the source files have been modified but not committed (graph only updates on commit).
+2. Run `npm run graph:update` to force a rebuild.
+3. If the issue persists, the extraction may have missed something — check `graphify-out/GRAPH_REPORT.md` for health warnings.
+
 ## Commands (run in this order)
 
 ```
