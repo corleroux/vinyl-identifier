@@ -1,5 +1,3 @@
-# Graphify integration test
-
 # Vinyl Identifier — Agent Guide
 
 ## Knowledge Graph (source of truth)
