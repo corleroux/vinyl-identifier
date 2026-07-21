@@ -29,17 +29,19 @@ No config file. Imported via `@import "tailwindcss"` in `src/index.css`. Configu
 
 ## Architecture
 
-| Layer         | Tech                        | Location                            |
-| ------------- | --------------------------- | ----------------------------------- |
-| Framework     | React 19 + TypeScript 6     | `src/`                              |
-| Routing       | react-router-dom v7         | `src/App.tsx` (all routes)          |
-| Client state  | Zustand                     | `src/store/`                        |
-| Server state  | TanStack Query              | providers in `src/main.tsx`         |
-| Local DB      | Dexie (IndexedDB)           | `src/db/schema.ts`                  |
-| i18n          | i18next + react-i18next v17 | `src/i18n/`, locale: `en.json`      |
-| Styling       | Tailwind v4                 | `src/index.css`                     |
-| Native bridge | Capacitor v8                | `capacitor.config.ts`               |
-| Backend       | Serverless (Workers/Edge)   | `serverless/` (separate from build) |
+See `PRD.md` §8 (Technology Choices) for the full rationale behind each choice.
+
+| Layer         | Tech                        | Location                            | Key files                                                                       |
+| ------------- | --------------------------- | ----------------------------------- | ------------------------------------------------------------------------------- |
+| Framework     | React 19 + TypeScript 6     | `src/`                              | `src/App.tsx`, `src/main.tsx`                                                   |
+| Routing       | react-router-dom v7         | `src/App.tsx` (all routes)          | `src/App.tsx`                                                                   |
+| Client state  | Zustand                     | `src/store/`                        | `src/store/useAppStore.ts` (app state), `src/store/useScanStore.ts` (scan flow) |
+| Server state  | TanStack Query              | providers in `src/main.tsx`         | `src/main.tsx` (QueryClientProvider), `src/services/api.ts` (query fns)         |
+| Local DB      | Dexie (IndexedDB)           | `src/db/schema.ts`                  | `src/db/schema.ts` (VinylDatabase class), `src/db/index.ts` (singleton)         |
+| i18n          | i18next + react-i18next v17 | `src/i18n/`, locale: `en.json`      | `src/i18n/index.ts` (init), `src/i18n/en.json` (strings)                        |
+| Styling       | Tailwind v4                 | `src/index.css`                     | `src/index.css` (`@import "tailwindcss"`)                                       |
+| Native bridge | Capacitor v8                | `capacitor.config.ts`               | `capacitor.config.ts`, `src/services/api.ts`                                    |
+| Backend       | Serverless (Workers/Edge)   | `serverless/` (separate from build) | `serverless/src/functions/identify.ts`, `serverless/src/functions/discogs.ts`   |
 
 - **No user accounts.** Everything is local-first via IndexedDB/Dexie. The Zustand store tracks scan count for the 5-scan free trial.
 - **App entrypoint:** `src/main.tsx` mounts QueryClientProvider → BrowserRouter → App. i18n is initialized via side-effect import.

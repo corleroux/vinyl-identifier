@@ -1,3 +1,9 @@
+/**
+ * i18n initialization — i18next + react-i18next with locale files in this directory.
+ * @see AGENTS.md#i18n — Namespace system and locale structure
+ * @see AGENTS.md#architecture — i18n layer
+ * @see PRD.md §8 — Technology Choices (i18next rationale)
+ */
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'

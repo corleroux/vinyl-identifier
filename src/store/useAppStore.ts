@@ -1,3 +1,8 @@
+/**
+ * Global application state — Zustand client state store.
+ * @see AGENTS.md#architecture — Client state layer
+ * @see PRD.md §8 — Technology Choices (Zustand rationale)
+ */
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { Currency } from '@/types'

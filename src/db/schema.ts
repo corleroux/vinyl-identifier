@@ -1,3 +1,9 @@
+/**
+ * Local database schema — Dexie (IndexedDB) for offline-first collection storage.
+ * @see AGENTS.md#architecture — Local DB layer
+ * @see PRD.md §6.7 — Offline / Local-First requirements
+ * @see PRD.md §8 — Technology Choices (Dexie rationale)
+ */
 import Dexie, { type EntityTable } from 'dexie'
 import type { VinylRecord, Folder, Tag, ScanResult } from '@/types'
 

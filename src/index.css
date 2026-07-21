@@ -1,3 +1,9 @@
+/**
+ * Tailwind CSS v4 — imported as a Vite plugin, no config file.
+ * @see AGENTS.md#tailwind-css-v4 — Setup notes
+ * @see AGENTS.md#architecture — Styling layer
+ * @see PRD.md §8 — Technology Choices (Tailwind rationale)
+ */
 @import 'tailwindcss';
 
 @layer base {
