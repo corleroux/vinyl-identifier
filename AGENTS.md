@@ -117,3 +117,5 @@ When picking up work:
 3. After making changes, run the full quality pipeline: `npm run lint && npm run typecheck && npm run test && npm run build`.
 4. If the pre-commit hook fails, install missing tools (`prettier`, etc.) and retry.
 5. Commit frequently with descriptive messages following conventional commit style.
+
+# Test comment for hook verification
