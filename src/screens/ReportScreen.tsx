@@ -208,6 +208,28 @@ export function ReportScreen() {
           )}
 
           <div className="border-t pt-4">
+            <p className="text-sm text-gray-500 mb-2">{t('report.marketplaceLinks')}</p>
+            <div className="flex gap-3">
+              <a
+                href={`https://www.discogs.com/search/?q=${encodeURIComponent(`${record.artist} ${record.album}`)}&type=release`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 btn-secondary text-center"
+              >
+                {t('report.searchDiscogs')}
+              </a>
+              <a
+                href={`https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(`${record.artist} ${record.album} vinyl`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 btn-secondary text-center"
+              >
+                {t('report.searchEbay')}
+              </a>
+            </div>
+          </div>
+
+          <div className="border-t pt-4">
             <label htmlFor="report-notes" className="text-sm text-gray-500 mb-2 block">
               {t('report.notes')}
             </label>
