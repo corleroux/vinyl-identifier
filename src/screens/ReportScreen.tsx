@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { RarityBadge } from '@/components/RarityBadge'
 import { ConditionSelector } from '@/components/ConditionSelector'
 import { CurrencySelector } from '@/components/CurrencySelector'
+import { PriceAlertButton } from '@/components/PriceAlertButton'
 import { useScanStore } from '@/store/useScanStore'
 import { useAppStore } from '@/store/useAppStore'
 import { db } from '@/db'
@@ -219,6 +220,10 @@ export function ReportScreen() {
               className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder={t('report.notesPlaceholder')}
             />
+          </div>
+
+          <div className="border-t pt-4">
+            <PriceAlertButton recordId={record.id} />
           </div>
         </div>
       </div>

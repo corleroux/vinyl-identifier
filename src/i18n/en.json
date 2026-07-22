@@ -132,6 +132,7 @@
     "title": "Settings",
     "language": "Language",
     "currency": "Currency",
+    "priceAlerts": "Price Alerts",
     "about": "About",
     "version": "Version",
     "scanLimit": "Free scans remaining",
@@ -200,5 +201,26 @@
     "csvNotes": "Notes",
     "csvFilename": "vinyl-collection",
     "jsonFilename": "vinyl-collection"
+  },
+  "priceAlerts": {
+    "title": "Price Alerts",
+    "setAlert": "Set Price Alert",
+    "createTitle": "Create Price Alert",
+    "threshold": "Notify me when price changes by",
+    "direction": "Direction",
+    "directionBothLabel": "Up or down",
+    "directionUpLabel": "Price increases",
+    "directionDownLabel": "Price decreases",
+    "alertActive": "Price alert active",
+    "directionBoth": "±{{percent}}%",
+    "directionUp": "+{{percent}}% or more",
+    "directionDown": "-{{percent}}% or more",
+    "checkNow": "Check Prices Now",
+    "markAllRead": "Mark All as Read",
+    "markRead": "Mark Read",
+    "noNotifications": "No price alerts yet. Set alerts on your records to get notified of price changes.",
+    "unreadCount": "{{count}} unread",
+    "oldPrice": "Old price",
+    "newPrice": "New price"
   }
 }

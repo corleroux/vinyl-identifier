@@ -108,6 +108,16 @@ export function SettingsScreen() {
         </div>
 
         <div className="border-t pt-4">
+          <button
+            onClick={() => navigate('/alerts')}
+            className="btn-secondary w-full min-h-[44px] flex items-center justify-center gap-2"
+          >
+            <span>🔔</span>
+            {t('settings.priceAlerts')}
+          </button>
+        </div>
+
+        <div className="border-t pt-4">
           <p className="text-sm text-gray-500">{t('settings.about')}</p>
           <p className="text-sm">{t('settings.version')} 1.0.0</p>
         </div>

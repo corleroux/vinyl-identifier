@@ -76,3 +76,27 @@ export interface Tag {
   name: string
   color?: string
 }
+
+export interface PriceAlert {
+  id: string
+  recordId: string
+  thresholdPercent?: number
+  thresholdAbsolute?: number
+  direction: 'up' | 'down' | 'both'
+  enabled: boolean
+  lastCheckedPrice?: number
+  createdAt: number
+  triggeredAt?: number
+}
+
+export interface PriceAlertNotification {
+  id: string
+  alertId: string
+  recordId: string
+  oldPrice: number
+  newPrice: number
+  changePercent: number
+  message: string
+  createdAt: number
+  read: boolean
+}
