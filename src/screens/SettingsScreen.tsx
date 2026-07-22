@@ -4,6 +4,15 @@ import { useNavigate } from 'react-router-dom'
 import { useAppStore } from '@/store/useAppStore'
 import { restorePurchases } from '@/services/purchase'
 import { track } from '@/services/analytics'
+import {
+  isSyncEnabled,
+  setSyncToken,
+  clearSyncToken,
+  generateSyncToken,
+  syncToCloud,
+  syncFromCloud,
+  getLastSync,
+} from '@/services/sync'
 import type { Currency } from '@/types'
 
 const LANGUAGES = [
@@ -26,6 +35,10 @@ export function SettingsScreen() {
   const scanCount = useAppStore((s) => s.scanCount)
   const maxFreeScans = useAppStore((s) => s.maxFreeScans)
   const [restoring, setRestoring] = useState(false)
+  const [syncEnabled, setSyncEnabled] = useState(isSyncEnabled())
+  const [syncing, setSyncing] = useState(false)
+  const [lastSync, setLastSync] = useState<number | null>(getLastSync())
+  const [syncError, setSyncError] = useState<string | null>(null)
 
   async function handleRestore() {
     setRestoring(true)
@@ -37,6 +50,46 @@ export function SettingsScreen() {
       }
     } finally {
       setRestoring(false)
+    }
+  }
+
+  function handleEnableSync() {
+    const token = generateSyncToken()
+    setSyncToken(token)
+    setSyncEnabled(true)
+    track('sync_enabled')
+  }
+
+  function handleDisableSync() {
+    clearSyncToken()
+    setSyncEnabled(false)
+    setLastSync(null)
+    track('sync_disabled')
+  }
+
+  async function handleSyncUp() {
+    setSyncing(true)
+    setSyncError(null)
+    const result = await syncToCloud()
+    setSyncing(false)
+    if (result.success) {
+      setLastSync(getLastSync())
+      track('sync_upload')
+    } else {
+      setSyncError(result.error || 'Sync failed')
+    }
+  }
+
+  async function handleSyncDown() {
+    setSyncing(true)
+    setSyncError(null)
+    const result = await syncFromCloud()
+    setSyncing(false)
+    if (result.success) {
+      setLastSync(getLastSync())
+      track('sync_download')
+    } else {
+      setSyncError(result.error || 'Sync failed')
     }
   }
 
@@ -79,6 +132,50 @@ export function SettingsScreen() {
               </option>
             ))}
           </select>
+        </div>
+
+        <div className="border-t pt-4">
+          <h2 className="text-lg font-semibold mb-3">{t('settings.sync')}</h2>
+          {syncEnabled ? (
+            <div className="space-y-3">
+              <p className="text-sm text-green-600">{t('settings.syncEnabled')}</p>
+              {lastSync && (
+                <p className="text-xs text-gray-500">
+                  {t('settings.lastSync')}: {new Date(lastSync).toLocaleString()}
+                </p>
+              )}
+              {syncError && <p className="text-sm text-red-600">{syncError}</p>}
+              <div className="flex gap-2">
+                <button
+                  onClick={handleSyncUp}
+                  disabled={syncing}
+                  className="flex-1 btn-secondary min-h-[44px]"
+                >
+                  {syncing ? t('common.loading') : t('settings.syncUp')}
+                </button>
+                <button
+                  onClick={handleSyncDown}
+                  disabled={syncing}
+                  className="flex-1 btn-secondary min-h-[44px]"
+                >
+                  {syncing ? t('common.loading') : t('settings.syncDown')}
+                </button>
+              </div>
+              <button
+                onClick={handleDisableSync}
+                className="w-full text-sm text-red-600 underline min-h-[44px]"
+              >
+                {t('settings.disableSync')}
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <p className="text-sm text-gray-600">{t('sync.description')}</p>
+              <button onClick={handleEnableSync} className="btn-primary w-full min-h-[44px]">
+                {t('settings.enableSync')}
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="border-t pt-4">
