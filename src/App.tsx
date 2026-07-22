@@ -47,6 +47,12 @@ const SettingsScreen = lazy(() =>
 const PaywallScreen = lazy(() =>
   import('@/screens/PaywallScreen').then((m) => ({ default: m.PaywallScreen })),
 )
+const PriceAlertsScreen = lazy(() =>
+  import('@/screens/PriceAlertsScreen').then((m) => ({ default: m.PriceAlertsScreen })),
+)
+const ConditionGradeScreen = lazy(() =>
+  import('@/screens/ConditionGradeScreen').then((m) => ({ default: m.ConditionGradeScreen })),
+)
 
 const HIDE_NAV_ROUTES = ['/scan/camera', '/scan/processing', '/scan/gallery']
 
@@ -94,6 +100,8 @@ export default function App() {
             <Route path="/compare" element={<CompareScreen />} />
             <Route path="/settings" element={<SettingsScreen />} />
             <Route path="/paywall" element={<PaywallScreen />} />
+            <Route path="/alerts" element={<PriceAlertsScreen />} />
+            <Route path="/grade-condition" element={<ConditionGradeScreen />} />
           </Routes>
         </Suspense>
       </main>

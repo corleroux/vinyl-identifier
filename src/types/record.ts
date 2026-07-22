@@ -29,6 +29,7 @@ export interface VinylRecord {
   currency: Currency
   condition: VinylCondition
   conditionSource: 'llm' | 'user'
+  conditionGrade?: ConditionGrade
   priceHistory?: string
   variants?: VinylVariant[]
   similarReleases?: SimilarRelease[]
@@ -75,4 +76,39 @@ export interface Tag {
   id: string
   name: string
   color?: string
+}
+
+export interface PriceAlert {
+  id: string
+  recordId: string
+  thresholdPercent?: number
+  thresholdAbsolute?: number
+  direction: 'up' | 'down' | 'both'
+  enabled: boolean
+  lastCheckedPrice?: number
+  createdAt: number
+  triggeredAt?: number
+}
+
+export interface PriceAlertNotification {
+  id: string
+  alertId: string
+  recordId: string
+  oldPrice: number
+  newPrice: number
+  changePercent: number
+  message: string
+  createdAt: number
+  read: boolean
+}
+
+export interface ConditionGrade {
+  overallGrade: string
+  confidence: number
+  surfaceNoise: 'none' | 'light' | 'moderate' | 'heavy'
+  scratches: { count: number; severity: 'minor' | 'moderate' | 'major' }
+  warps: { present: boolean; severity: 'none' | 'mild' | 'moderate' | 'severe' }
+  wear: { edge: number; surface: number }
+  defects: string[]
+  recommendation: string
 }

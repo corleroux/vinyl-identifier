@@ -224,3 +224,39 @@ export async function searchDiscogsByArtistAlbum(
   setCached(cacheKey, data)
   return data
 }
+
+export interface ConditionGradeResponse {
+  overallGrade: string
+  confidence: number
+  surfaceNoise: 'none' | 'light' | 'moderate' | 'heavy'
+  scratches: { count: number; severity: 'minor' | 'moderate' | 'major' }
+  warps: { present: boolean; severity: 'none' | 'mild' | 'moderate' | 'severe' }
+  wear: { edge: number; surface: number }
+  defects: string[]
+  recommendation: string
+}
+
+export async function gradeCondition(image: Blob): Promise<ConditionGradeResponse> {
+  const formData = new FormData()
+  formData.append('image', image, 'vinyl.jpg')
+
+  const response = await fetchWithRetry(
+    `${API_BASE}/grade-condition`,
+    {
+      method: 'POST',
+      body: formData,
+    },
+    MAX_RETRIES,
+    60_000,
+  )
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => null)
+    throw new NetworkError(
+      err?.error ?? `Condition grading failed: ${response.statusText}`,
+      response.status,
+    )
+  }
+
+  return (await response.json()) as ConditionGradeResponse
+}

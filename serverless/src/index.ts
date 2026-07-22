@@ -2,6 +2,7 @@ import type { Env } from './env'
 import { handleIdentify } from './functions/identify'
 import { handleDiscogs } from './functions/discogs'
 import { handleSyncPut, handleSyncGet } from './functions/sync'
+import { handleGradeCondition } from './functions/grade-condition'
 
 function corsHeaders(origin: string | null, env: Env): Record<string, string> {
   const allowed = env.ALLOWED_ORIGINS || 'http://localhost:5173'
@@ -51,6 +52,12 @@ export default {
 
     if (url.pathname === '/api/sync' && request.method === 'GET') {
       const res = await handleSyncGet(request, env)
+      Object.entries(corsHeaders(origin, env)).forEach(([k, v]) => res.headers.set(k, v))
+      return res
+    }
+
+    if (url.pathname === '/api/grade-condition' && request.method === 'POST') {
+      const res = await handleGradeCondition(request, env)
       Object.entries(corsHeaders(origin, env)).forEach(([k, v]) => res.headers.set(k, v))
       return res
     }

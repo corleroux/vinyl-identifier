@@ -15,6 +15,7 @@
     "camera": "Take Photo",
     "gallery": "Upload from Gallery",
     "barcode": "Scan Barcode",
+    "conditionGrading": "Grade Condition",
     "recentScans": "Recent Scans",
     "batchMode": "Batch mode ({{count}} scanned)",
     "reviewBatch": "Review Batch ({{count}} records)",
@@ -80,7 +81,55 @@
     "g_plus": "G+",
     "good": "Good",
     "fair": "Fair",
-    "poor": "Poor"
+    "poor": "Poor",
+    "grading": {
+      "title": "Condition Grading",
+      "selectImagePrompt": "Take a clear photo of your vinyl record to get an AI-powered condition assessment",
+      "selectImage": "Select Photo",
+      "retake": "Retake",
+      "grade": "Grade Condition",
+      "grading": "Analyzing condition...",
+      "tryAnother": "Try Another",
+      "confidence": "Confidence",
+      "surfaceNoise": "Surface Noise",
+      "scratches": "Scratches",
+      "scratch": "scratch",
+      "scratchesCount": "scratches",
+      "warps": "Warps",
+      "warpDetected": "Warp detected",
+      "noWarps": "No warps detected",
+      "edgeWear": "Edge Wear",
+      "surfaceWear": "Surface Wear",
+      "defects": "Defects",
+      "recommendation": "Recommendation",
+      "grade": {
+        "mint": "Mint",
+        "near_mint": "Near Mint",
+        "vg_plus": "VG+",
+        "vg": "VG",
+        "g_plus": "G+",
+        "good": "Good",
+        "fair": "Fair",
+        "poor": "Poor"
+      },
+      "noise": {
+        "none": "None",
+        "light": "Light",
+        "moderate": "Moderate",
+        "heavy": "Heavy"
+      },
+      "severity": {
+        "minor": "Minor",
+        "moderate": "Moderate",
+        "major": "Major"
+      },
+      "warpSeverity": {
+        "none": "None",
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe"
+      }
+    }
   },
   "library": {
     "title": "My Collection",
