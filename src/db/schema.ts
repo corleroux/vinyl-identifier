@@ -31,7 +31,7 @@ export class VinylDatabase extends Dexie {
       tags: 'id, name',
       scanHistory: 'id, status, createdAt',
       priceAlerts: 'id, recordId, enabled, createdAt',
-      priceAlertNotifications: 'id, alertId, createdAt, read',
+      priceAlertNotifications: 'id, alertId, recordId, createdAt, read',
     })
   }
 }
