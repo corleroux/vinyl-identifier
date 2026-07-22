@@ -1,3 +1,8 @@
+/**
+ * App entrypoint — mounts QueryClientProvider (TanStack Query) → BrowserRouter → App.
+ * @see AGENTS.md#architecture — Server state layer, Framework layer
+ * @see PRD.md §8 — Technology Choices (TanStack Query, React rationale)
+ */
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'

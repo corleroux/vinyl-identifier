@@ -29,3 +29,14 @@ serverless/.wrangler/
 .eas/credentials.json
 *.jks
 *.keystore
+
+# OpenCode (project-local config)
+.opencode/node_modules
+.opencode/package.json
+.opencode/package-lock.json
+.opencode/.gitignore
+
+graphify-out/cache
+graphify-out/.graphify_*
+graphify-out/.needs_update
+graphify-out/20*-*/

@@ -1,3 +1,9 @@
+/**
+ * Identify endpoint — Vision LLM → Research LLM → Discogs enrichment pipeline.
+ * @see AGENTS.md#architecture — Backend layer
+ * @see PRD.md §6.2 — LLM Processing Pipeline requirements
+ * @see PRD.md §8 — Technology Choices (Cloudflare Workers rationale)
+ */
 import type { Env } from '../env'
 import { identifyWithVision, researchWithLLM } from '../lib/llm'
 import { searchByBarcode, searchByArtistAlbum } from '../lib/discogs'

@@ -200,12 +200,18 @@ function VirtualizedGrid({
   const ROW_HEIGHT = 200
   const rowCount = Math.ceil(records.length / COLUMN_COUNT)
 
-  const rowVirtualizer = useVirtualizer({
-    count: rowCount,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => ROW_HEIGHT,
-    overscan: 3,
-  })
+  const virtualizerOptions = useMemo(
+    () => ({
+      count: rowCount,
+      getScrollElement: () => parentRef.current,
+      estimateSize: () => ROW_HEIGHT,
+      overscan: 3,
+    }),
+    [rowCount],
+  )
+
+  // eslint-disable-next-line react-hooks/incompatible-library -- TanStack Virtual returns functions that can't be memoized, but it's only used locally
+  const rowVirtualizer = useVirtualizer(virtualizerOptions)
 
   return (
     <div

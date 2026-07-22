@@ -1,0 +1,200 @@
+#!/usr/bin/env bash
+# Post-commit hook: auto-update graphify knowledge graph on source changes.
+# Only re-extracts when code or documentation files change.
+
+set -e
+
+# Skip if graphify-out doesn't exist (graph hasn't been built yet)
+if [ ! -f "graphify-out/graph.json" ]; then
+  exit 0
+fi
+
+# Detect the Python interpreter (same logic as graphify skill)
+PYTHON=""
+if [ -f "graphify-out/.graphify_python" ]; then
+  PYTHON=$(cat graphify-out/.graphify_python)
+fi
+if [ -z "$PYTHON" ] || ! "$PYTHON" -c "import graphify" 2>/dev/null; then
+  GRAPHIFY_BIN=$(which graphify 2>/dev/null)
+  if [ -n "$GRAPHIFY_BIN" ]; then
+    PYTHON=$(head -1 "$GRAPHIFY_BIN" | tr -d '#!')
+    case "$PYTHON" in *[!a-zA-Z0-9/_.@-]*) PYTHON="python3" ;; esac
+  else
+    PYTHON="python3"
+  fi
+fi
+
+# Check if any source files changed (not graphify-out, not binary)
+CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git diff --name-only HEAD)
+SOURCE_CHANGED=""
+for f in $CHANGED; do
+  # Skip graphify-out, node_modules, generated files, binary
+  case "$f" in
+    graphify-out/*|node_modules/*|dist/*|android/*|ios/*|.opencode/*) continue ;;
+    *.png|*.jpg|*.jpeg|*.gif|*.svg|*.ico|*.woff|*.woff2|*.ttf|*.eot) continue ;;
+    *.lock|package-lock.json|yarn.lock|pnpm-lock.yaml) continue ;;
+  esac
+  # Include code and doc files
+  case "$f" in
+    *.ts|*.tsx|*.js|*.jsx|*.json|*.md|*.css|*.html|*.yml|*.yaml|*.sh|*.gradle|*.swift|*.java)
+      SOURCE_CHANGED="$SOURCE_CHANGED $f"
+      ;;
+  esac
+done
+
+if [ -z "$SOURCE_CHANGED" ]; then
+  exit 0
+fi
+
+echo "[graphify] Source files changed, updating graph..."
+"$PYTHON" -c "
+import sys, json
+from pathlib import Path
+from graphify.detect import detect_incremental, save_manifest
+from graphify.build import build_merge
+
+result = detect_incremental(Path('.'))
+new_total = result.get('new_total', 0)
+deleted = list(result.get('deleted_files', []))
+
+if new_total == 0 and not deleted:
+    print('[graphify] No relevant changes detected.')
+    sys.exit(0)
+
+# Write incremental state
+Path('graphify-out/.graphify_incremental.json').write_text(
+    json.dumps(result, ensure_ascii=False), encoding='utf-8'
+)
+
+# Populate .graphify_detect.json for the extraction pipeline
+Path('graphify-out/.graphify_detect.json').write_text(json.dumps({
+    'files': result.get('new_files', {}),
+    'all_files': result.get('files', {}),
+    'total_files': result.get('new_total', 0),
+    'total_words': result.get('total_words', 0),
+    'skipped_sensitive': result.get('skipped_sensitive', []),
+    'needs_graph': True,
+}, ensure_ascii=False), encoding='utf-8')
+
+print(f'[graphify] {new_total} changed, {len(deleted)} deleted')
+" 2>&1
+
+# Run AST extraction on changed files
+"$PYTHON" -c "
+import json
+from graphify.extract import collect_files, extract
+from pathlib import Path
+
+detect = json.loads(Path('graphify-out/.graphify_detect.json').read_text(encoding='utf-8'))
+code_files = []
+for f in detect.get('files', {}).get('code', []):
+    code_files.extend(collect_files(Path(f)) if Path(f).is_dir() else [Path(f)])
+
+if code_files:
+    result = extract(code_files, cache_root=Path('.'))
+    Path('graphify-out/.graphify_ast.json').write_text(
+        json.dumps(result, indent=2, ensure_ascii=False), encoding='utf-8'
+    )
+    # Write empty semantic (docs handled separately)
+    Path('graphify-out/.graphify_semantic.json').write_text(
+        json.dumps({'nodes':[],'edges':[],'hyperedges':[],'input_tokens':0,'output_tokens':0}),
+        encoding='utf-8'
+    )
+    # Merge AST + empty semantic
+    Path('graphify-out/.graphify_extract.json').write_text(
+        json.dumps(result, indent=2, ensure_ascii=False), encoding='utf-8'
+    )
+    print(f'[graphify] AST: {len(result[\"nodes\"])} nodes, {len(result[\"edges\"])} edges')
+else:
+    Path('graphify-out/.graphify_extract.json').write_text(
+        json.dumps({'nodes':[],'edges':[],'hyperedges':[],'input_tokens':0,'output_tokens':0}),
+        encoding='utf-8'
+    )
+" 2>&1
+
+# Backup old graph, then merge
+cp graphify-out/graph.json graphify-out/.graphify_old.json 2>/dev/null || true
+
+"$PYTHON" -c "
+import json
+from pathlib import Path
+from graphify.build import build_merge
+from graphify.detect import save_manifest
+
+new_extraction = json.loads(Path('graphify-out/.graphify_extract.json').read_text(encoding='utf-8'))
+incremental = json.loads(Path('graphify-out/.graphify_incremental.json').read_text(encoding='utf-8'))
+deleted = list(incremental.get('deleted_files', []))
+prune = list(deleted) or None
+
+G = build_merge(
+    [new_extraction],
+    graph_path='graphify-out/graph.json',
+    prune_sources=prune,
+    root='.',
+    directed=False,
+)
+print(f'[graphify] Merged: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges')
+
+merged_out = {
+    'nodes': [{'id': n, **d} for n, d in G.nodes(data=True)],
+    'edges': [
+        {**{k: v for k, v in d.items() if k not in ('_src', '_tgt', 'source', 'target')},
+         'source': d.get('_src', u), 'target': d.get('_tgt', v)}
+        for u, v, d in G.edges(data=True)
+    ],
+    'hyperedges': list(G.graph.get('hyperedges', [])),
+    'input_tokens': 0,
+    'output_tokens': 0,
+}
+Path('graphify-out/.graphify_extract.json').write_text(
+    json.dumps(merged_out, ensure_ascii=False), encoding='utf-8'
+)
+save_manifest(incremental['files'], root='.')
+" 2>&1
+
+# Re-cluster and regenerate report + HTML
+"$PYTHON" -c "
+import json
+from pathlib import Path
+from graphify.build import build_from_json
+from graphify.cluster import cluster, score_all
+from graphify.analyze import god_nodes, surprising_connections, suggest_questions
+from graphify.report import generate
+from graphify.export import to_json
+
+extraction = json.loads(Path('graphify-out/.graphify_extract.json').read_text(encoding='utf-8'))
+detection = json.loads(Path('graphify-out/.graphify_detect.json').read_text(encoding='utf-8'))
+
+G = build_from_json(extraction, root='.', directed=False)
+communities = cluster(G)
+cohesion = score_all(G, communities)
+gods = god_nodes(G)
+surprises = surprising_connections(G, communities)
+
+# Load existing labels
+labels_path = Path('graphify-out/.graphify_labels.json')
+labels = {}
+if labels_path.exists():
+    labels = {int(k): v for k, v in json.loads(labels_path.read_text(encoding='utf-8')).items()}
+else:
+    labels = {cid: f'Community {cid}' for cid in communities}
+
+questions = suggest_questions(G, communities, labels)
+to_json(G, communities, 'graphify-out/graph.json')
+report = generate(G, communities, cohesion, labels, gods, surprises, detection,
+                  {'input': 0, 'output': 0}, '.', suggested_questions=questions)
+Path('graphify-out/GRAPH_REPORT.md').write_text(report, encoding='utf-8')
+" 2>&1
+
+# Regenerate HTML
+graphify export html 2>/dev/null || "$PYTHON" -c "
+from graphify.export import to_html
+to_html('graphify-out/graph.json', 'graphify-out/graph.html')
+" 2>/dev/null
+
+# Cleanup
+rm -f graphify-out/.graphify_old.json graphify-out/.graphify_incremental.json \
+      graphify-out/.graphify_detect.json graphify-out/.graphify_extract.json \
+      graphify-out/.graphify_ast.json graphify-out/.graphify_semantic.json
+
+echo "[graphify] Graph updated."

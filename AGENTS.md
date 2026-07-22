@@ -1,5 +1,47 @@
 # Vinyl Identifier — Agent Guide
 
+## Knowledge Graph (source of truth)
+
+**The knowledge graph is the primary source of truth for understanding this codebase.** Always query the graph before reading raw source files.
+
+### Graph-first query workflow
+
+1. **Check the graph first.** Run `graphify query "<question>"` to answer questions about architecture, data flow, dependencies, or code structure.
+2. **Use `graphify path "A" "B"`** to find the shortest path between two concepts.
+3. **Use `graphify explain "NodeName"`** to understand a specific node and its connections.
+4. **Fall back to source files only if the graph cannot answer the question.** The graph is rebuilt automatically on every commit, so it should be current.
+
+### Graph outputs
+
+- `graphify-out/graph.html` — interactive visualization (open in browser)
+- `graphify-out/GRAPH_REPORT.md` — audit report with god nodes, surprising connections, community structure
+- `graphify-out/graph.json` — raw graph data (queryable via `graphify query`)
+
+### Graph freshness
+
+The graph is auto-updated via `.husky/post-commit` after every commit. To verify freshness:
+
+```bash
+npm run graph:check   # exits 0 if current, 1 if stale
+```
+
+If stale, rebuild:
+
+```bash
+npm run graph:update  # code-only update (no LLM)
+/graphify             # full rebuild including docs (agent session)
+```
+
+The graph is a development tool, not a production dependency. A stale graph does not block releases.
+
+### When the graph is wrong
+
+If a graph query returns incorrect or missing information:
+
+1. Check if the source files have been modified but not committed (graph only updates on commit).
+2. Run `npm run graph:update` to force a rebuild.
+3. If the issue persists, the extraction may have missed something — check `graphify-out/GRAPH_REPORT.md` for health warnings.
+
 ## Commands (run in this order)
 
 ```
@@ -29,17 +71,19 @@ No config file. Imported via `@import "tailwindcss"` in `src/index.css`. Configu
 
 ## Architecture
 
-| Layer         | Tech                        | Location                            |
-| ------------- | --------------------------- | ----------------------------------- |
-| Framework     | React 19 + TypeScript 6     | `src/`                              |
-| Routing       | react-router-dom v7         | `src/App.tsx` (all routes)          |
-| Client state  | Zustand                     | `src/store/`                        |
-| Server state  | TanStack Query              | providers in `src/main.tsx`         |
-| Local DB      | Dexie (IndexedDB)           | `src/db/schema.ts`                  |
-| i18n          | i18next + react-i18next v17 | `src/i18n/`, locale: `en.json`      |
-| Styling       | Tailwind v4                 | `src/index.css`                     |
-| Native bridge | Capacitor v8                | `capacitor.config.ts`               |
-| Backend       | Serverless (Workers/Edge)   | `serverless/` (separate from build) |
+See `PRD.md` §8 (Technology Choices) for the full rationale behind each choice.
+
+| Layer         | Tech                        | Location                            | Key files                                                                       |
+| ------------- | --------------------------- | ----------------------------------- | ------------------------------------------------------------------------------- |
+| Framework     | React 19 + TypeScript 6     | `src/`                              | `src/App.tsx`, `src/main.tsx`                                                   |
+| Routing       | react-router-dom v7         | `src/App.tsx` (all routes)          | `src/App.tsx`                                                                   |
+| Client state  | Zustand                     | `src/store/`                        | `src/store/useAppStore.ts` (app state), `src/store/useScanStore.ts` (scan flow) |
+| Server state  | TanStack Query              | providers in `src/main.tsx`         | `src/main.tsx` (QueryClientProvider), `src/services/api.ts` (query fns)         |
+| Local DB      | Dexie (IndexedDB)           | `src/db/schema.ts`                  | `src/db/schema.ts` (VinylDatabase class), `src/db/index.ts` (singleton)         |
+| i18n          | i18next + react-i18next v17 | `src/i18n/`, locale: `en.json`      | `src/i18n/index.ts` (init), `src/i18n/en.json` (strings)                        |
+| Styling       | Tailwind v4                 | `src/index.css`                     | `src/index.css` (`@import "tailwindcss"`)                                       |
+| Native bridge | Capacitor v8                | `capacitor.config.ts`               | `capacitor.config.ts`, `src/services/api.ts`                                    |
+| Backend       | Serverless (Workers/Edge)   | `serverless/` (separate from build) | `serverless/src/functions/identify.ts`, `serverless/src/functions/discogs.ts`   |
 
 - **No user accounts.** Everything is local-first via IndexedDB/Dexie. The Zustand store tracks scan count for the 5-scan free trial.
 - **App entrypoint:** `src/main.tsx` mounts QueryClientProvider → BrowserRouter → App. i18n is initialized via side-effect import.

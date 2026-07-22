@@ -1,0 +1,1156 @@
+{
+  "nodes": [
+    {
+      "id": "prd_vinyl_identifier",
+      "label": "Vinyl Identifier",
+      "file_type": "document",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_multi_model_llm_pipeline",
+      "label": "Multi-Model LLM Pipeline",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_local_first_architecture",
+      "label": "Local-First Architecture",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_rarity_report",
+      "label": "Rarity Report",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_collection_library",
+      "label": "Collection Library",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_compare_mode",
+      "label": "Compare Mode",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_five_scan_free_trial",
+      "label": "5-Scan Free Trial",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_one_time_purchase",
+      "label": "One-Time Purchase Monetization",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_discogs_integration",
+      "label": "Discogs API Integration",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_ar_framing_overlay",
+      "label": "AR-Style Framing Overlay",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_condition_assessment",
+      "label": "Condition Assessment",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_wcag_2_1_aa",
+      "label": "WCAG 2.1 AA Accessibility",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_scan_to_report_15s",
+      "label": "Scan-to-Report <15s Target",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prd_bundle_size_200kb",
+      "label": "Bundle Size <200KB Budget",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_react_19",
+      "label": "React 19",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_typescript_6",
+      "label": "TypeScript 6",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_vite",
+      "label": "Vite",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_zustand",
+      "label": "Zustand",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_tanstack_query",
+      "label": "TanStack Query",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_dexie_indexeddb",
+      "label": "Dexie (IndexedDB)",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_i18next",
+      "label": "i18next",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_tailwind_v4",
+      "label": "Tailwind CSS v4",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_capacitor_v8",
+      "label": "Capacitor v8",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_cloudflare_workers",
+      "label": "Cloudflare Workers / Edge",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_vinyl_record_type",
+      "label": "VinylRecord Type",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_rarity_tier_type",
+      "label": "RarityTier Type",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_vinyl_condition_type",
+      "label": "VinylCondition Type",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_scan_result_type",
+      "label": "ScanResult Type",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_screen_route_system",
+      "label": "Screen/Route System",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_phase_based_development",
+      "label": "Phase-Based Development",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "contributing_i18n_namespace_system",
+      "label": "i18n Namespace System",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/CONTRIBUTING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "contributing_translation_workflow",
+      "label": "Translation Contribution Workflow",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/CONTRIBUTING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_vite_react_template",
+      "label": "Vite React Template",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_mobile_deployment_pipeline",
+      "label": "Mobile Deployment Pipeline",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_eas_build",
+      "label": "EAS Build",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_cap_sync",
+      "label": "Capacitor Sync (cap sync)",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_tag_triggered_ci",
+      "label": "Tag-Triggered CI",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_unsigned_ci_builds",
+      "label": "Unsigned CI Builds Gap",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_ci_eas_disconnected",
+      "label": "CI and EAS Disconnected",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_version_sync_gap",
+      "label": "Version Sync Gap",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_android_permissions_stale",
+      "label": "Android Permissions Stale",
+      "file_type": "rationale",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_eas_profiles",
+      "label": "EAS Build Profiles",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_capacitor_config",
+      "label": "Capacitor Configuration",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "stats_rollup_visualizer",
+      "label": "Rollup Visualizer",
+      "file_type": "concept",
+      "source_file": "/home/cor/Development/vinyl/stats.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_favicon_svg",
+      "label": "Vinyl Identifier Favicon",
+      "file_type": "image",
+      "source_file": "/home/cor/Development/vinyl/public/favicon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_icons_svg",
+      "label": "Social Icons Sprite Sheet",
+      "file_type": "image",
+      "source_file": "/home/cor/Development/vinyl/public/icons.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_multi_model_llm_pipeline",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_local_first_architecture",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_rarity_report",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_collection_library",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_compare_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_five_scan_free_trial",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_one_time_purchase",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_discogs_integration",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_multi_model_llm_pipeline",
+      "target": "prd_discogs_integration",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_multi_model_llm_pipeline",
+      "target": "prd_rarity_report",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_local_first_architecture",
+      "target": "prd_collection_library",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_five_scan_free_trial",
+      "target": "prd_one_time_purchase",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_ar_framing_overlay",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_condition_assessment",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_wcag_2_1_aa",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_scan_to_report_15s",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_vinyl_identifier",
+      "target": "prd_bundle_size_200kb",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_react_19",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_typescript_6",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_vite",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_zustand",
+      "target": "prd_local_first_architecture",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_tanstack_query",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_dexie_indexeddb",
+      "target": "prd_local_first_architecture",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_i18next",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_tailwind_v4",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_capacitor_v8",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_cloudflare_workers",
+      "target": "prd_multi_model_llm_pipeline",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_cloudflare_workers",
+      "target": "prd_discogs_integration",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_vinyl_record_type",
+      "target": "prd_rarity_report",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_rarity_tier_type",
+      "target": "prd_rarity_report",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_vinyl_condition_type",
+      "target": "prd_condition_assessment",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_scan_result_type",
+      "target": "prd_multi_model_llm_pipeline",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_screen_route_system",
+      "target": "prd_vinyl_identifier",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_phase_based_development",
+      "target": "prd_vinyl_identifier",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_i18next",
+      "target": "contributing_i18n_namespace_system",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "contributing_translation_workflow",
+      "target": "contributing_i18n_namespace_system",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/CONTRIBUTING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_vite_react_template",
+      "target": "agents_vite",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_vite_react_template",
+      "target": "agents_react_19",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "agents_capacitor_v8",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_eas_build",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_cap_sync",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_tag_triggered_ci",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_unsigned_ci_builds",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_ci_eas_disconnected",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_version_sync_gap",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_mobile_deployment_pipeline",
+      "target": "docs_android_permissions_stale",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_eas_build",
+      "target": "docs_eas_profiles",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_cap_sync",
+      "target": "docs_capacitor_config",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_tag_triggered_ci",
+      "target": "agents_vite",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "stats_rollup_visualizer",
+      "target": "prd_bundle_size_200kb",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "/home/cor/Development/vinyl/stats.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "public_favicon_svg",
+      "target": "prd_vinyl_identifier",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/public/favicon.svg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "public_icons_svg",
+      "target": "prd_vinyl_identifier",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "/home/cor/Development/vinyl/public/icons.svg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_zustand",
+      "target": "prd_five_scan_free_trial",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_dexie_indexeddb",
+      "target": "prd_collection_library",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_screen_route_system",
+      "target": "prd_collection_library",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_screen_route_system",
+      "target": "prd_compare_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_ci_eas_disconnected",
+      "target": "docs_version_sync_gap",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "prd_multi_model_llm_pipeline",
+      "target": "prd_scan_to_report_15s",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/PRD.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_tanstack_query",
+      "target": "agents_cloudflare_workers",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "technology_stack_layer",
+      "label": "Vinyl Identifier Technology Stack",
+      "nodes": [
+        "agents_react_19",
+        "agents_typescript_6",
+        "agents_vite",
+        "agents_zustand",
+        "agents_tanstack_query",
+        "agents_dexie_indexeddb",
+        "agents_i18next",
+        "agents_tailwind_v4",
+        "agents_capacitor_v8",
+        "agents_cloudflare_workers"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md"
+    },
+    {
+      "id": "deployment_build_pathways",
+      "label": "Mobile Build and Deployment Pathways",
+      "nodes": [
+        "docs_eas_build",
+        "docs_cap_sync",
+        "docs_tag_triggered_ci",
+        "docs_eas_profiles",
+        "docs_capacitor_config",
+        "agents_vite"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/docs/mobile-deployment-pipeline.md"
+    },
+    {
+      "id": "domain_model_types",
+      "label": "Vinyl Domain Model Types",
+      "nodes": [
+        "agents_vinyl_record_type",
+        "agents_rarity_tier_type",
+        "agents_vinyl_condition_type",
+        "agents_scan_result_type"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/home/cor/Development/vinyl/AGENTS.md"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

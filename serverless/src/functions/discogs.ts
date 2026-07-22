@@ -1,3 +1,9 @@
+/**
+ * Discogs proxy endpoint — queries Discogs API with barcode / artist+album.
+ * @see AGENTS.md#architecture — Backend layer
+ * @see PRD.md §6.3 — Discogs Integration requirements
+ * @see PRD.md §8 — Technology Choices (Cloudflare Workers rationale)
+ */
 import type { Env } from '../env'
 import { searchByBarcode, searchByArtistAlbum } from '../lib/discogs'
 
