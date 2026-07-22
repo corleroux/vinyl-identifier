@@ -1,5 +1,46 @@
 # Contributing to Vinyl Identifier
 
+## Development workflow
+
+### Picking up work
+
+1. Check `ROADMAP.md` for the current phase and outstanding tasks.
+2. Create a branch from `main`:
+   ```bash
+   git checkout -b feat/cloud-sync
+   ```
+   Use prefixes: `feat/`, `fix/`, `chore/`, `docs/`.
+
+### Making changes
+
+1. Implement the feature or fix.
+2. Commit frequently with conventional messages (`feat:`, `fix:`, `chore:`, `docs:`).
+3. Run the quality pipeline before pushing:
+   ```bash
+   npm run lint && npm run typecheck && npm run test && npm run build
+   ```
+
+### Opening a pull request
+
+1. Push your branch and open a PR against `main`:
+   ```bash
+   git push -u origin feat/cloud-sync
+   gh pr create
+   ```
+2. Fill in the PR template — reference the roadmap phase/task.
+3. CI must pass (lint, typecheck, test, build) before merging.
+4. Merge to `main` via squash merge preferred.
+
+### Branch protection (recommended)
+
+Set these rules on `main` in GitHub Settings > Branches:
+
+- Require pull request before merging
+- Require status checks to pass (`PR Check`)
+- Disallow force pushes
+
+---
+
 ## Translations
 
 We welcome translations! Here's how to contribute:
