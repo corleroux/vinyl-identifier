@@ -32,6 +32,17 @@ export interface ResearchResult {
   }>
 }
 
+export interface ConditionGradeResult {
+  overallGrade: string
+  confidence: number
+  surfaceNoise: 'none' | 'light' | 'moderate' | 'heavy'
+  scratches: { count: number; severity: 'minor' | 'moderate' | 'major' }
+  warps: { present: boolean; severity: 'none' | 'mild' | 'moderate' | 'severe' }
+  wear: { edge: number; surface: number }
+  defects: string[]
+  recommendation: string
+}
+
 function getProviderConfig(env: Env, providerName: string) {
   switch (providerName) {
     case 'gemini':
@@ -157,5 +168,71 @@ Return JSON with exactly:
     priceHistory: (result.priceHistory as string) ?? '',
     variants: (result.variants as ResearchResult['variants']) ?? [],
     similarReleases: (result.similarReleases as ResearchResult['similarReleases']) ?? [],
+  }
+}
+
+export async function gradeConditionWithVision(
+  imageBuffer: ArrayBuffer,
+  contentType: string,
+  env: Env,
+): Promise<ConditionGradeResult> {
+  const base64 = btoa(
+    new Uint8Array(imageBuffer).reduce((acc, byte) => acc + String.fromCharCode(byte), ''),
+  )
+
+  const conditionPrompt: LLMMessage[] = [
+    {
+      role: 'user',
+      content: [
+        {
+          type: 'text',
+          text: `You are a vinyl record condition grading expert. Analyze this vinyl record image and provide a detailed condition assessment.
+
+Evaluate the following aspects:
+1. Overall condition grade (mint, near_mint, vg_plus, vg, g_plus, good, fair, poor)
+2. Surface noise level (none, light, moderate, heavy)
+3. Scratches (count and severity)
+4. Warps (presence and severity)
+5. Edge wear (0-100 scale)
+6. Surface wear (0-100 scale)
+7. Any visible defects (list them)
+8. Confidence in your assessment (0-1)
+9. Recommendation for the seller
+
+Return JSON with exactly:
+- overallGrade: string (mint|near_mint|vg_plus|vg|g_plus|good|fair|poor)
+- confidence: number (0-1)
+- surfaceNoise: string (none|light|moderate|heavy)
+- scratches: { count: number, severity: string (minor|moderate|major) }
+- warps: { present: boolean, severity: string (none|mild|moderate|severe) }
+- wear: { edge: number, surface: number }
+- defects: string[] (list of visible defects)
+- recommendation: string (advice for seller)`,
+        },
+        {
+          type: 'image_url',
+          image_url: { url: `data:${contentType};base64,${base64}` },
+        },
+      ],
+    },
+  ]
+
+  const result = await callLLMWithFallback(env, conditionPrompt, conditionPrompt, true)
+
+  return {
+    overallGrade: (result.overallGrade as string) ?? 'vg',
+    confidence: (result.confidence as number) ?? 0.5,
+    surfaceNoise: (result.surfaceNoise as ConditionGradeResult['surfaceNoise']) ?? 'light',
+    scratches: (result.scratches as ConditionGradeResult['scratches']) ?? {
+      count: 0,
+      severity: 'minor',
+    },
+    warps: (result.warps as ConditionGradeResult['warps']) ?? {
+      present: false,
+      severity: 'none',
+    },
+    wear: (result.wear as ConditionGradeResult['wear']) ?? { edge: 0, surface: 0 },
+    defects: (result.defects as string[]) ?? [],
+    recommendation: (result.recommendation as string) ?? '',
   }
 }

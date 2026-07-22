@@ -67,6 +67,12 @@ export function HomeScreen() {
           >
             {t('home.barcode')}
           </button>
+          <button
+            onClick={() => navigate('/grade-condition')}
+            className="btn-secondary min-h-[48px] border-2 border-blue-500 text-blue-600 font-semibold"
+          >
+            {t('home.conditionGrading')}
+          </button>
         </nav>
 
         {!isFullVersion && (
