@@ -1,6 +1,7 @@
 import type { Env } from './env'
 import { handleIdentify } from './functions/identify'
 import { handleDiscogs } from './functions/discogs'
+import { handleSyncPut, handleSyncGet } from './functions/sync'
 
 function corsHeaders(origin: string | null, env: Env): Record<string, string> {
   const allowed = env.ALLOWED_ORIGINS || 'http://localhost:5173'
@@ -8,8 +9,8 @@ function corsHeaders(origin: string | null, env: Env): Record<string, string> {
 
   return {
     'Access-Control-Allow-Origin': allowOrigin,
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Max-Age': '86400',
   }
 }
@@ -38,6 +39,18 @@ export default {
 
     if (url.pathname === '/api/discogs' && request.method === 'GET') {
       const res = await handleDiscogs(request, env)
+      Object.entries(corsHeaders(origin, env)).forEach(([k, v]) => res.headers.set(k, v))
+      return res
+    }
+
+    if (url.pathname === '/api/sync' && request.method === 'PUT') {
+      const res = await handleSyncPut(request, env)
+      Object.entries(corsHeaders(origin, env)).forEach(([k, v]) => res.headers.set(k, v))
+      return res
+    }
+
+    if (url.pathname === '/api/sync' && request.method === 'GET') {
+      const res = await handleSyncGet(request, env)
       Object.entries(corsHeaders(origin, env)).forEach(([k, v]) => res.headers.set(k, v))
       return res
     }

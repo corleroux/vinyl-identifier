@@ -135,12 +135,22 @@
     "title": "Settings",
     "language": "Language",
     "currency": "Currency",
+    "sync": "Cloud Sync",
+    "syncEnabled": "Sync is enabled",
+    "lastSync": "Last sync",
+    "syncUp": "Upload",
+    "syncDown": "Download",
+    "enableSync": "Enable Cloud Sync",
+    "disableSync": "Disable Sync",
     "about": "About",
     "version": "Version",
     "scanLimit": "Free scans remaining",
     "purchase": "Unlock Full Version",
     "purchased": "Full Version",
     "restorePurchases": "Restore Purchases"
+  },
+  "sync": {
+    "description": "Sync your collection across devices. Your data is stored securely in the cloud."
   },
   "paywall": {
     "title": "Unlock Full Version",

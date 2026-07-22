@@ -8,6 +8,12 @@
       "invocation_logs": true
     }
   },
+  "kv_namespaces": [
+    {
+      "binding": "SYNC_KV",
+      "id": "SYNC_KV_ID"
+    }
+  ],
   "env": {
     "staging": {
       "name": "vinyl-identifier-staging",
@@ -20,7 +26,13 @@
         "OPENAI_COMPAT_ENDPOINT": "https://integrate.api.nvidia.com/v1/chat/completions",
         "OPENAI_COMPAT_MODEL": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
         "ALLOWED_ORIGINS": "http://localhost:5173,https://localhost,capacitor://localhost"
-      }
+      },
+      "kv_namespaces": [
+        {
+          "binding": "SYNC_KV",
+          "id": "SYNC_KV_STAGING_ID"
+        }
+      ]
     }
   }
 }

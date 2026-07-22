@@ -19,4 +19,7 @@ export interface Env {
 
   // CORS
   ALLOWED_ORIGINS: string
+
+  // Sync
+  SYNC_KV: KVNamespace
 }
