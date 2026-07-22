@@ -2,12 +2,12 @@
 
 ## Corpus Check
 
-- 10 files · ~44,559 words
+- 13 files · ~44,982 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
 
-- 619 nodes · 674 edges · 65 communities (49 shown, 16 thin omitted)
+- 630 nodes · 678 edges · 70 communities (52 shown, 18 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.73)
 - Token cost: 0 input · 0 output
 
@@ -49,15 +49,19 @@
 - TypeScript Base Config
 - Capacitor Config
 - Offline Banner
+- Batch Session Screen
 - Gallery Screen
 - Home Screen
-- Image Preview Screen
+- Manual Input Screen
 - Paywall Screen
 - Processing Screen
-- Report Screen
-- Product Requirements Document: Vinyl Identifier
-- Vinyl Identifier — Agent Guide
-- graph-check.mjs
+- Scan History Screen
+- E2E Tests
+- ESLint Config
+- Android CI Build
+- Translations
+- Tasks
+- Tasks
 
 ## God Nodes (most connected - your core abstractions)
 
@@ -95,7 +99,7 @@
 - **Mobile Build and Deployment Pathways** — docs_eas_build, docs_cap_sync, docs_tag_triggered_ci, docs_eas_profiles, docs_capacitor_config, agents_vite [EXTRACTED 1.00]
 - **Vinyl Domain Model Types** — agents_vinyl_record_type, agents_rarity_tier_type, agents_vinyl_condition_type, agents_scan_result_type [EXTRACTED 1.00]
 
-## Communities (65 total, 16 thin omitted)
+## Communities (70 total, 18 thin omitted)
 
 ### Community 0 - "Package Dependencies"
 
@@ -119,13 +123,13 @@ Nodes (35): Cloudflare Workers / Edge, Dexie (IndexedDB), i18next, Phase-Based D
 
 ### Community 4 - "Serverless Backend"
 
-Cohesion: 0.07
-Nodes (28): lint-staged, _.{json,css,md}, _.{ts,tsx}, name, private, scripts, build, cap:open:android (+20 more)
+Cohesion: 0.08
+Nodes (23): App(), BarcodeScreen, BatchSessionScreen, CameraScreen, CompareScreen, GalleryScreen, HIDE_NAV_ROUTES, HomeScreen (+15 more)
 
 ### Community 5 - "Project Configuration"
 
-Cohesion: 0.08
-Nodes (22): App(), BarcodeScreen, BatchSessionScreen, CameraScreen, CompareScreen, GalleryScreen, HIDE_NAV_ROUTES, HomeScreen (+14 more)
+Cohesion: 0.07
+Nodes (28): lint-staged, _.{json,css,md}, _.{ts,tsx}, name, private, scripts, build, cap:open:android (+20 more)
 
 ### Community 6 - "TypeScript App Config"
 
@@ -134,13 +138,13 @@ Nodes (27): Capacitor v8, Android Permissions Stale, Capacitor Sync (cap sync), 
 
 ### Community 7 - "TypeScript Node Config"
 
-Cohesion: 0.08
-Nodes (25): DOM, src, vite/client, compilerOptions, allowImportingTsExtensions, baseUrl, erasableSyntaxOnly, ignoreDeprecations (+17 more)
+Cohesion: 0.15
+Nodes (20): Env, handleDiscogs(), JSON_HEADERS, handleIdentify(), JSON_HEADERS, corsHeaders(), fetch(), json() (+12 more)
 
 ### Community 8 - "Gemini LLM Provider"
 
-Cohesion: 0.18
-Nodes (17): Env, handleDiscogs(), JSON_HEADERS, handleIdentify(), JSON_HEADERS, discogsHeaders(), DiscogsResult, searchByArtistAlbum() (+9 more)
+Cohesion: 0.08
+Nodes (25): DOM, src, vite/client, compilerOptions, allowImportingTsExtensions, baseUrl, erasableSyntaxOnly, ignoreDeprecations (+17 more)
 
 ### Community 9 - "UI Components"
 
@@ -159,8 +163,8 @@ Nodes (13): GeminiContent, GeminiPart, geminiProvider, GeminiRequest, GeminiResp
 
 ### Community 12 - "API Service Client"
 
-Cohesion: 0.13
-Nodes (14): AROverlay, conditions, ConditionSelector, ConditionSelectorProps, currencies, CurrencySelector, CurrencySelectorProps, ProgressIndicator (+6 more)
+Cohesion: 0.22
+Nodes (16): checkPriceAlerts(), clearAllNotifications(), createPriceAlert(), deleteNotification(), deletePriceAlert(), generateAlertMessage(), getAlertsForRecord(), getAllAlerts() (+8 more)
 
 ### Community 13 - "Capacitor & Native Bridge"
 
@@ -179,87 +183,97 @@ Nodes (13): @cloudflare/workers-types, devDependencies, @cloudflare/workers-type
 
 ### Community 16 - "Zustand State Store"
 
-Cohesion: 0.23
-Nodes (9): DiscogsBarcodeResult, fetchWithRetry(), IdentifyResponse, identifyVinyl(), isOffline(), NetworkError, OfflineError, searchDiscogsBarcode() (+1 more)
+Cohesion: 0.15
+Nodes (11): Currency, Folder, PriceAlert, PriceAlertNotification, RarityTier, ScanResult, SimilarRelease, Tag (+3 more)
 
 ### Community 17 - "Library Screen"
 
-Cohesion: 0.36
-Nodes (9): clearSyncToken(), generateSyncToken(), getLastSync(), getSyncToken(), isSyncEnabled(), setSyncToken(), SyncData, syncFromCloud() (+1 more)
+Cohesion: 0.23
+Nodes (9): DiscogsBarcodeResult, fetchWithRetry(), IdentifyResponse, identifyVinyl(), isOffline(), NetworkError, OfflineError, searchDiscogsBarcode() (+1 more)
 
 ### Community 18 - "Export Utilities"
-
-Cohesion: 0.18
-Nodes (9): Currency, Folder, RarityTier, ScanResult, SimilarRelease, Tag, VinylCondition, VinylRecord (+1 more)
-
-### Community 19 - "Expo/EAS Config"
 
 Cohesion: 0.40
 Nodes (8): InAppPurchase, purchaseAndroid(), purchaseFullVersion(), purchaseIOS(), PurchaseResult, restoreAndroid(), restoreIOS(), restorePurchases()
 
-### Community 20 - "Service Worker"
+### Community 19 - "Expo/EAS Config"
 
 Cohesion: 0.32
 Nodes (7): GRAPH_PATH, graphStat, IGNORE_PATTERNS, isSourceFile(), MANIFEST_PATH, SOURCE_EXTENSIONS, staleSourceFiles
 
-### Community 21 - "Database Schema"
-
-Cohesion: 0.50
-Nodes (6): handleSyncGet(), handleSyncPut(), JSON_HEADERS, corsHeaders(), fetch(), json()
-
-### Community 22 - "Barcode Detector Types"
+### Community 20 - "Service Worker"
 
 Cohesion: 0.32
 Nodes (5): AppState, useAppStore, ScanStage, ScanState, useScanStore
 
-### Community 23 - "Cache Utilities"
+### Community 21 - "Database Schema"
 
 Cohesion: 0.29
 Nodes (6): Adding a New Language, Contributing to Vinyl Identifier, Questions?, String Keys, Translation Guidelines, Translations
 
-### Community 24 - "Install Prompt"
+### Community 22 - "Barcode Detector Types"
 
 Cohesion: 0.29
 Nodes (3): RARITY_ORDER, SortKey, ViewMode
 
-### Community 26 - "Compare Screen"
+### Community 24 - "Install Prompt"
 
 Cohesion: 0.40
 Nodes (4): projectId, expo, extra, eas
 
-### Community 29 - "Bottom Navigation"
+### Community 26 - "Compare Screen"
+
+Cohesion: 0.40
+Nodes (4): ProgressIndicator, ProgressIndicatorProps, Step, steps
+
+### Community 28 - "Analytics Service"
 
 Cohesion: 0.40
 Nodes (3): BarcodeDetector, BarcodeDetectorConstructor, BarcodeDetectorResult
 
-### Community 31 - "Format Utilities"
+### Community 30 - "Lazy Image Component"
 
 Cohesion: 0.50
 Nodes (3): Expanding the ESLint configuration, React Compiler, React + TypeScript + Vite
 
-### Community 33 - "TypeScript Base Config"
+### Community 31 - "Format Utilities"
+
+Cohesion: 0.50
+Nodes (3): conditions, ConditionSelector, ConditionSelectorProps
+
+### Community 32 - "Platform Utilities"
+
+Cohesion: 0.50
+Nodes (3): currencies, CurrencySelector, CurrencySelectorProps
+
+### Community 35 - "Offline Banner"
+
+Cohesion: 0.50
+Nodes (3): RarityBadge, RarityBadgeProps, tierColors
+
+### Community 36 - "Batch Session Screen"
 
 Cohesion: 0.83
 Nodes (3): CameraScreen(), captureWithCapacitor(), dataUrlToBlob()
 
 ## Knowledge Gaps
 
-- **298 isolated node(s):** `projectId`, `config`, `name`, `private`, `version` (+293 more)
+- **306 isolated node(s):** `projectId`, `config`, `name`, `private`, `version` (+301 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `devDependencies` connect `Package Dependencies` to `Serverless Backend`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `Capacitor Plugins` to `Serverless Backend`?**
-  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+- **Why does `devDependencies` connect `Package Dependencies` to `Project Configuration`?**
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `Capacitor Plugins` to `Project Configuration`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **Why does `Vinyl Identifier` connect `React Screens & Routing` to `TypeScript App Config`, `Type Definitions`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **What connects `projectId`, `config`, `name` to the rest of the system?**
-  _298 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _306 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Package Dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.04081632653061224 - nodes in this community are weakly interconnected._
 - **Should `Capacitor Plugins` be split into smaller, more focused modules?**
